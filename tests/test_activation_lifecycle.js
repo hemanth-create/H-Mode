@@ -124,7 +124,9 @@ test('Bash statusline hides an explicit off flag and still displays an active ba
 
 test('PowerShell statusline hides an explicit off flag and still displays an active badge', t => {
   const shell = process.platform === 'win32' ? 'powershell' : 'pwsh';
-  const probe = spawnSync(shell, ['-NoProfile', '-Command', 'exit 0'], { timeout: 5000 });
+  // Allow CI's first PowerShell launch to warm up. Actual badge executions
+  // below still have the five-second timeout and must return the right output.
+  const probe = spawnSync(shell, ['-NoProfile', '-Command', 'exit 0'], { timeout: 30000 });
   if (probe.error?.code === 'ENOENT') { t.skip('PowerShell is unavailable'); return; }
   assert.equal(probe.status, 0, String(probe.error || 'PowerShell probe failed'));
   const s = session(t, 'on');
