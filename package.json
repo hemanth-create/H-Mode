@@ -1,0 +1,9 @@
+{
+  "name": "h-mode",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Hemanth's concise, reuse-first coding skill with an optional local log preview helper.",
+  "license": "MIT",
+  "engines": { "node": ">=18" },
+  "scripts": { "test": "node --test tests/*.test.cjs" }
+}

@@ -1,0 +1,4 @@
+interface:
+  display_name: "H-Mode"
+  short_description: "Concise answers and minimal, verified code changes"
+  default_prompt: "Use $h-mode to solve this task with the smallest correct change and focused verification."
