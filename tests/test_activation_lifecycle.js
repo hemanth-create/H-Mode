@@ -67,12 +67,28 @@ test('one-shot commands preserve an explicit off choice', t => {
   s.start('startup');
   s.prompt('/h-mode off');
   for (const name of ['audit', 'review', 'help']) {
-    for (const prefix of ['/', '/h-mode:', '', 'use ', 'please use ']) {
+    for (const prefix of ['/', '/h-mode:', '', 'use ', 'please use ',
+      'Can you use ', 'Could you please use ', 'How do I use ']) {
       assert.equal(s.prompt(prefix + 'h-mode-' + name), '');
       assert.equal(s.mode(), 'off');
     }
     assert.equal(s.prompt('use h-mode ' + name + ' src/'), '');
     assert.equal(s.mode(), 'off');
+  }
+});
+
+test('negated, help, and audit requests leave reminders and compression disabled', t => {
+  const s = session(t, 'off');
+  s.start('startup');
+  for (const prompt of [
+    'Do not use h-mode for this task.',
+    'How do I use h-mode?',
+    'Can you use h-mode-audit on this repository?',
+    'Could you please use h-mode review on this repository?',
+  ]) {
+    assert.equal(s.prompt(prompt), '', prompt + ': no active reminder');
+    assert.equal(s.mode(), 'off', prompt + ': preserve mode');
+    assert.equal(s.compress(), '', prompt + ': no compression');
   }
 });
 

@@ -6,12 +6,16 @@ const path = require('path');
 const ROOT = path.join(__dirname, '..');
 const check = process.argv.includes('--check');
 
+// Normalize physical line endings before serialization: escaped CRs inside
+// JSON/TOML strings survive Git's checkout conversion and cause permanent drift.
+const normalizeEol = text => text.replace(/\r\n/g, '\n');
+
 function skillBody(name) {
-  const text = fs.readFileSync(path.join(ROOT, 'skills', name, 'SKILL.md'), 'utf8');
-  if (!/^---\r?\n[\s\S]*?\r?\n---\r?\n/.test(text)) {
+  const text = normalizeEol(fs.readFileSync(path.join(ROOT, 'skills', name, 'SKILL.md'), 'utf8'));
+  if (!/^---\n[\s\S]*?\n---\n/.test(text)) {
     throw new Error('Missing skill frontmatter: ' + name);
   }
-  return text.replace(/^---\r?\n[\s\S]*?\r?\n---\r?\n/, '').trim();
+  return text.replace(/^---\n[\s\S]*?\n---\n/, '').trim();
 }
 
 function section(body, name) {
@@ -73,7 +77,7 @@ for (const [file, want] of outputs) {
   const absolute = path.join(ROOT, file);
   if (check) {
     let have = '';
-    try { have = fs.readFileSync(absolute, 'utf8'); } catch (_) {}
+    try { have = normalizeEol(fs.readFileSync(absolute, 'utf8')); } catch (_) {}
     if (have !== want) { console.error('OUT OF SYNC: ' + file); drift++; }
   } else {
     fs.mkdirSync(path.dirname(absolute), { recursive: true });

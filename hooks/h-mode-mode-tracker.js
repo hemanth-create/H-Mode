@@ -17,21 +17,14 @@ process.stdin.on('end', () => {
     const data = JSON.parse(input.replace(/^﻿/, ''));
     const prompt = (data.prompt || '').trim();
     const promptLower = prompt.toLowerCase();
+    // Only direct requests control persistent mode. Do not scan questions,
+    // negations, or quoted examples for activation/deactivation words.
+    const request = promptLower.replace(/^(?:please\s+)?(?:(?:can|could|would)\s+you\s+(?:please\s+)?)?/, '');
     // One-shot audit/review/help commands must not activate the persistent mode.
-    if (/^\/(?:h-mode:)?h-mode-(?:audit|review|help)(?:\s|$)/.test(promptLower) ||
-        /^(?:please\s+)?(?:use\s+)?h-mode[ -](?:audit|review|help)(?:\s|$)/.test(promptLower)) return;
+    if (/^\/(?:h-mode:)?h-mode-(?:audit|review|help)(?=$|[\s.!?,;:])/.test(request) ||
+        /^(?:(?:activate|enable|turn on|start|use)\s+)?h-mode[ -](?:audit|review|help)(?=$|[\s.!?,;:])/.test(request)) return;
 
-    // Natural language activation
-    if (/\b(activate|enable|turn on|start|use)\b.*\bh-mode\b/i.test(promptLower) ||
-        /\bh-mode\b.*\b(mode|activate|enable|on)\b/i.test(promptLower) ||
-        /\bh-modify\b/i.test(promptLower)) {
-      if (!/\b(stop|disable|turn off|deactivate|off)\b/i.test(promptLower)) {
-        safeWriteFlag(flagPath, 'on');
-      }
-    }
-
-    // /h-mode slash commands. No level argument any more: /h-mode on,
-    // /h-mode off, nothing else.
+    // Slash commands retain legacy level arguments as activation aliases.
     if (/^\/(?:h-mode:)?h-mode(?:\s|$)/.test(promptLower)) {
       const parts = promptLower.split(/\s+/);
       const arg = parts[1] || '';
@@ -40,16 +33,15 @@ process.stdin.on('end', () => {
       } else {
         safeWriteFlag(flagPath, 'on');
       }
-    }
-
-    // Natural language deactivation.
-    // Only fire when the off-verb actually targets h-mode — NOT when h-mode merely
-    // appears in a sentence that also mentions turning something else off.
-    // ("use h-mode to turn off the logger" must NOT deactivate.)
-    if (/\b(turn off|disable|deactivate|stop|kill|exit)\s+h-mode\b/i.test(promptLower) ||
-        /\bh-mode\s+(mode\s+)?(off|stop|disable|deactivate)\b/i.test(promptLower) ||
-        /\bnormal mode\b/i.test(promptLower)) {
+    } else if (/^(?:turn off|disable|deactivate|stop|kill|exit)\s+h-mode(?=$|[\s.!?,;:])/.test(request) ||
+        /^(?:h-mode\s+(?:mode\s+)?(?:off|stop|disable|deactivate)|normal mode)[.!?]?$/.test(request)) {
       safeWriteFlag(flagPath, 'off');
+    } else if (/^(?:(?:activate|enable|turn on|start|use)\s+h-mode|h-modify)(?=$|[\s.!?,;:])/.test(request) ||
+        /^h-mode\s+(?:mode(?:\s+on)?|activate|enable|on)[.!?]?$/.test(request)) {
+      // The target boundary excludes h-mode-audit/review/help. Off/stop words
+      // later in the task (e.g. "use h-mode to turn off the logger") are unrelated.
+      // Bare mode selectors must stand alone, not introduce an explanation.
+      safeWriteFlag(flagPath, 'on');
     }
 
     // Per-turn reinforcement

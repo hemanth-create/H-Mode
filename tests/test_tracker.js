@@ -50,8 +50,32 @@ test('natural language "activate h-mode" activates', () => {
 });
 
 test('explicit activation overrides an off default, including qualified and natural commands', () => {
-  for (const prompt of ['/h-mode', '/h-mode on', '/h-mode:h-mode on', 'activate h-mode']) {
+  for (const prompt of [
+    '/h-mode', '/h-mode on', '/h-mode:h-mode on', 'activate h-mode',
+    'please enable h-mode', 'turn on h-mode', 'start h-mode',
+    'use h-mode for this task.', 'h-mode mode', 'h-mode mode on', 'h-mode on',
+    'h-mode activate', 'h-mode enable', 'h-modify this',
+    'Can you please activate H-Mode?', 'use h-mode to turn off the logger',
+  ]) {
     assert.equal(runTracker(prompt, { defaultMode: 'off', preActive: 'off' }), 'on', prompt);
+  }
+});
+
+test('negations, questions, and quoted mentions preserve inactive and active state', () => {
+  for (const prompt of [
+    'Do not use h-mode for this task.', 'Please do not activate h-mode.',
+    "Don't enable h-mode.", 'Never start h-mode.', 'Do not h-modify this.',
+    'How do I use h-mode?', 'How do I activate h-mode?',
+    'Explain how to use h-mode.', 'Tell me about h-mode mode.',
+    '"activate h-mode"', '`h-modify this`', 'What does /h-mode on do?',
+    'Do not disable h-mode.', 'How do I turn off h-mode?',
+    'Explain normal mode.', 'H-mode mode is not enabled; leave it that way.',
+    'H-mode on or off: which should I use?', 'H-mode mode: how do I use it?',
+    'H-mode off means what?', 'Normal mode is what I used before.',
+  ]) {
+    for (const preActive of [null, 'off', 'on']) {
+      assert.equal(runTracker(prompt, { defaultMode: 'off', preActive }), preActive, prompt);
+    }
   }
 });
 
@@ -67,6 +91,17 @@ test('"/h-mode off" deactivates', () => {
 
 test('"normal mode" deactivates', () => {
   assert.equal(runTracker('normal mode', { preActive: 'on' }), 'off');
+});
+
+test('direct deactivation commands still work with polite prefixes and mode aliases', () => {
+  for (const prompt of [
+    '/h-mode:h-mode off', '/h-mode stop', '/h-mode disable',
+    'Please turn off h-mode.', 'Could you please disable h-mode?',
+    'deactivate h-mode', 'kill h-mode', 'exit h-mode',
+    'h-mode mode off', 'h-mode stop', 'h-mode disable', 'h-mode deactivate',
+  ]) {
+    assert.equal(runTracker(prompt, { preActive: 'on' }), 'off', prompt);
+  }
 });
 
 // ── Regression: must NOT deactivate on unrelated "off"/"stop" ─────────────────
