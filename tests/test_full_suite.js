@@ -68,7 +68,15 @@ test('standalone Claude installation includes all skills and full activation rul
     env: { ...process.env, CLAUDE_CONFIG_DIR: dir, H_MODE_UPDATE_CHECK: '0', H_MODE_DEFAULT_MODE: 'on' },
   });
   assert.equal(activate.status, 0, activate.stderr);
-  assert.ok(activate.stdout.includes('## Code: The Efficiency Ladder'));
+  const body = read('skills/h-mode/SKILL.md').replace(/^---[\s\S]*?---\s*/, '');
+  assert.ok(activate.stdout.includes(body), 'installed hook reads the complete installed skill');
+  const tracker = spawnSync(process.execPath, [path.join(dir, 'h-mode-hooks/h-mode-mode-tracker.js')], {
+    input: JSON.stringify({ prompt: 'continue' }), encoding: 'utf8',
+    env: { ...process.env, CLAUDE_CONFIG_DIR: dir },
+  });
+  assert.equal(tracker.status, 0, tracker.stderr);
+  assert.equal(JSON.parse(tracker.stdout).hookSpecificOutput.additionalContext,
+    JSON.parse(read('hooks/h-mode-instructions.json')).reminder);
 });
 
 test('Codex custom-directory install is complete, repeatable, and preserves user instructions', t => {
@@ -114,7 +122,7 @@ test('audit/review/help commands do not toggle persistent mode, including namesp
   assert.equal(run('/h-mode:h-mode').status, 0);
   assert.equal(fs.readFileSync(flag, 'utf8').trim(), 'on');
   run('/h-mode:h-mode off');
-  assert.ok(!fs.existsSync(flag));
+  assert.equal(fs.readFileSync(flag, 'utf8').trim(), 'off');
 });
 
 test('plugin installation removes duplicate standalone hooks while preserving foreign hooks', { skip: process.platform === 'win32' }, t => {

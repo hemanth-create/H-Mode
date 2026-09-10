@@ -21,7 +21,7 @@ $mode = $raw.Substring(0, [Math]::Min(64, $raw.Length)).ToLower()
 $mode = ($mode -replace '[^a-z0-9-]', '')
 
 switch ($mode) {
-  'off' { }
+  'off' { exit 0 }
   'on'  { }
   default { exit 0 }
 }

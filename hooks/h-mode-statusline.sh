@@ -21,7 +21,7 @@ MODE=$(printf '%s' "$MODE" | tr -cd 'a-z0-9-')
 
 # Whitelist — render nothing for unknown values rather than echo attacker bytes.
 case "$MODE" in
-  off|on) ;;
+  on) ;;
   *) exit 0 ;;
 esac
 

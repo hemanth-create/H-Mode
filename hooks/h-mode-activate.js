@@ -9,7 +9,8 @@
 
 const fs = require('fs');
 const path = require('path');
-const { getDefaultMode, getClaudeDir, safeWriteFlag, legacySetting } = require('./h-mode-config');
+const { getDefaultMode, getClaudeDir, safeWriteFlag, readFlag, legacySetting } = require('./h-mode-config');
+const { fallback } = require('./h-mode-instructions.json');
 
 // ── Update-notice helpers (pure — tested directly) ─────────────────────────
 // Minor/patch releases stay quiet: a nudge per major is signal, more is spam.
@@ -63,7 +64,7 @@ async function latestVersion(cachePath) {
 // behaviour every turn anyway. Re-sending ~1.6k tokens each time was the bulk
 // of the plugin's own overhead and piled standing instructions on top of what
 // the user actually asked for. Measured and reported by @enc0ded (#2).
-const FULL_INJECT_SOURCES = new Set(['startup']);
+const CONTINUATION_SOURCES = new Set(['resume', 'clear', 'compact']);
 
 // ── Hook body ───────────────────────────────────────────────────────────────
 function run(source) {
@@ -71,19 +72,20 @@ function run(source) {
   const flagPath = path.join(claudeDir, '.h-mode-active');
   const settingsPath = path.join(claudeDir, 'settings.json');
 
-  const mode = getDefaultMode();
+  const continuing = CONTINUATION_SOURCES.has(source);
+  const savedMode = continuing ? readFlag(flagPath) : null;
+  const mode = savedMode ?? getDefaultMode();
+  // Persist off to distinguish a user's choice from uninitialized state.
+  // New sessions use the default; continuation events preserve the current choice.
+  if (savedMode === null) safeWriteFlag(flagPath, mode);
 
   if (mode === 'off') {
-    try { fs.unlinkSync(flagPath); } catch (e) {}
-    process.stdout.write('OK');
-    process.exit(0);
+    process.stdout.write('H-MODE OFF. Use normal style until the user activates H-Mode.');
+    return;
   }
 
-  // 1. Write flag
-  safeWriteFlag(flagPath, mode);
-
-  // 2. Resumed/cleared/compacted session: reactivate, don't re-teach.
-  if (!FULL_INJECT_SOURCES.has(source)) {
+  // Preserve state without repeating the full skill on continuation events.
+  if (continuing) {
     process.stdout.write(
       'H-MODE ACTIVE (resumed). ' +
       'Ruleset already in context; see the h-mode skill if it is not.'
@@ -106,16 +108,7 @@ function run(source) {
     output = 'H-MODE ACTIVE\n\n' + skillContent.replace(/^---[\s\S]*?---\s*/, '');
   } else {
     // Fallback ruleset when SKILL.md not found
-    output =
-      'H-MODE ACTIVE\n\n' +
-      'H-Mode: maximum-efficiency dev mode. Zero-fluff prose. YAGNI-first code.\n\n' +
-      '## Persistence\n\n' +
-      'ACTIVE EVERY RESPONSE. Off only: "stop h-mode" / "normal mode".\n\n' +
-      '## Prose\n\n' +
-      'Drop articles/filler/pleasantries/hedging. Fragments OK. Technical terms exact.\n\n' +
-      '## Code\n\n' +
-      'Ladder: YAGNI → reuse → stdlib → native → installed dep → one line → min code.\n' +
-      'No unrequested abstractions. Deletion over addition. Shortest diff wins.';
+    output = fallback;
   }
 
   // 3. Detect missing statusline config

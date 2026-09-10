@@ -1,73 +1,69 @@
 ---
 name: h-mode-audit
 description: >
-  One-shot efficiency audit of a file, diff, or whole repo across BOTH axes at
-  once: over-engineered code (reinvented stdlib, needless abstractions,
-  speculative config) AND bloated prose (verbose comments, padded docstrings,
-  redundant doc sections). Neither a pure code-minimizer nor a pure prose
-  compressor does both in one pass — that's the point. Ranked report, biggest
-  saving first; changes nothing. Use when the user says "h-mode audit", "/h-mode-audit",
-  "audit this for bloat", "what can I cut", "review this PR for over-engineering
-  and verbosity".
+  Read-only efficiency audit of code and prose in a diff, file, or repository.
+  Identify unnecessary complexity using callers, requirements, and contracts.
+  Use for /h-mode-audit, "h-mode audit", "audit this for bloat", or
+  "what can I cut".
 ---
 
 # H-Mode Audit
 
-Scan the target (a diff, a file, or the repo tree) and report what to cut, on
-both axes. One-shot. Read-only — never edit, never write a flag, never apply fixes.
+Audit both code complexity and unnecessary prose. Remain read-only: do not edit,
+write mode state, publish comments, or apply fixes.
 
 ## Scope
 
-- No argument → audit staged and unstaged changes. If empty, inspect the latest
-  commit only after stating that scope; for a root commit, use its added files.
+- No argument: inspect staged and unstaged changes. If empty, state that you are
+  inspecting the latest commit; for a root commit, inspect its added files.
   If no commit exists, report that there is no diff to audit.
-- A path → audit that file or directory.
-- "repo" / "whole repo" → walk the tree (skip vendored/generated/`node_modules`/`dist`/lockfiles).
+- A path: inspect that file or directory.
+- An explicit whole-repository request: inspect the tree, excluding vendored,
+  generated, dependency, build-output, and lock files unless relevant or requested.
 
-## What to flag
+State the inspected scope and material exclusions. Do not imply unread files
+were reviewed.
 
-**Code (the YAGNI axis):**
-- Reinvented stdlib (hand-rolled debounce, deep-clone, groupBy, retry loop, date math)
-- Abstraction with one implementation (interface/factory/wrapper for a single case)
-- New dependency for what a few lines or an installed dep already covers
-- Config/option/flag that never varies
-- Speculative "for later" scaffolding with no current caller
-- Verbose code where a native platform feature (CSS, DB constraint, `<input type>`) does it
+## Evidence
 
-**Prose (the compression axis) — the half a code-only auditor misses:**
-- Comments that restate the code (`i += 1  // increment i`)
-- Docstrings/READMEs padded with filler, hedging, ceremony, or duplicated content
-- Multi-paragraph explanations where one tight sentence carries the meaning
-- Decorative tables/emoji/headings that add tokens, not information
-- Dead prose: TODO graveyards, stale "see also" links, obsolete sections
+For code, investigate duplicated capabilities, unused options, speculative
+scaffolding, and unnecessary wrappers or dependencies. These are candidates,
+not automatic findings. A single implementation may serve a public contract,
+test seam, domain boundary, or platform requirement.
 
-## What NOT to flag
+Check affected callers, tests, configuration, and requirements before proposing
+removal. Establish what behavior the replacement preserves and what risk it
+introduces. A built-in function or shorter implementation is suitable only if
+its semantics match. For example, cache simplification must retain any required
+expiry, invalidation, eviction, and concurrency behavior.
 
-Input validation at trust boundaries, error handling that prevents data loss,
-security, accessibility, deliberate `// h-mode:` / `// ponytail:` shortcuts already
-documented, or domain comments that explain *why* (not *what*).
+For prose, identify obsolete instructions, duplicated explanations, and comments
+that restate the code. Preserve rationale, domain definitions, operational steps,
+and uncertainty that helps the reader. Judge headings and tables by usefulness,
+not by their token count alone.
 
-## Output
+Do not recommend removing security, accessibility, trust-boundary validation,
+data-loss protections, public contracts, or explicit requirements. An annotated
+shortcut is context to inspect, not a blanket exemption.
 
-One ranked list, biggest cut first. One finding per line. No preamble, no praise.
+## Findings
 
-```
-path:line  [code|prose]  <what's bloated> → <the lean replacement>. (~N lines/tokens)
-```
+Rank actionable findings by expected benefit and change risk. For each, give:
 
-End with a two-line summary:
+- Path and line, plus code or prose classification.
+- Evidence: the relevant caller, contract, test, or duplicated passage.
+- Suggested simplification, expected benefit, and behavior that must remain.
+- Confidence and any specific unresolved assumption.
 
-```
-N findings: X code, Y prose. Est. removable: ~A lines code, ~B lines prose.
-Biggest win: <the single highest-impact cut>.
-```
+Keep findings concise; use more than one line when the rationale needs it.
+Separate unverified candidates from confirmed findings and say what would
+resolve the uncertainty. Do not count candidates as proven removable work.
 
-Be honest about uncertainty — mark a finding `(check)` if cutting it might lose
-behavior you can't verify from the snippet. Lean toward fewer, high-confidence
-findings over a long speculative list.
+For example: two CLI handlers build the same usage text with identical flags.
+If both callers and help snapshots confirm equivalence, share that formatting
+while preserving command-specific names and exit behavior.
 
-Check callers, tests, and public contracts before concluding that a construct is
-unnecessary. A single implementation can still serve a required boundary.
-Honor the user's target and report any excluded or unread files. Do not publish
-an audit or open issues unless separately requested. Counts are estimates, not
-measured token savings.
+End with the finding count, material review limits, and the most useful next
+step if one is supported. Estimate line reductions only when grounded in the
+proposed change; do not invent token savings. If nothing is supported, report
+that no actionable findings were found in the inspected scope.

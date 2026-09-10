@@ -5,9 +5,11 @@ to every agent that supports a rules/context file. One source, many targets.
 
 ## Source of truth
 
-`skills/h-mode/SKILL.md` defines behavior. The short always-on rule lives in
-`rules/h-mode-activate.md`. Per-agent copies are **generated** from a shared body in
-`scripts/build-rules.js` — never hand-edit the generated files.
+`skills/h-mode/SKILL.md` defines shared behavior in its marked core/reminder
+sections. `scripts/build-rules.js` generates editor rules, AGENTS/GEMINI context,
+`rules/h-mode-activate.md`, and runtime instruction JSON from those sections.
+Each Gemini command embeds the body of its matching skill. Do not hand-edit
+the 13 generated files.
 
 ## Distribution map
 
@@ -29,8 +31,8 @@ node scripts/build-rules.js          # regenerate all copies
 node scripts/build-rules.js --check  # CI gate — fails if any drifted
 ```
 
-CI runs `--check` on every push. Edit the body in `build-rules.js`, regenerate,
-commit. The generated files are committed (not built on install) so marketplace
+CI runs `--check` on every push and PR. Edit the relevant SKILL.md, regenerate,
+and commit. The generated files are committed (not built on install) so marketplace
 and `git clone` installs work without a build step.
 
 ## What does NOT port
@@ -39,3 +41,7 @@ The statusline badge, token-savings counter, and lifecycle hooks are
 Claude-Code-specific. Codex and Gemini can select the four skills/commands,
 but they do not receive Claude runtime behavior just by loading those instructions.
 Claude plugin installs may use namespaced slash names; use the host command picker.
+
+Claude stores explicit on/off state. Resume, clear, and compaction preserve it;
+new startup uses the configured default. The state directory remains shared
+across concurrent sessions, so this is not per-session isolation.

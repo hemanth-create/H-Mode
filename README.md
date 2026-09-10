@@ -72,6 +72,10 @@ picker for the exact displayed name. Audit and review do not apply fixes or
 publish comments. `stop h-mode`, `/h-mode off`, or `normal mode` turns the main
 mode off in Claude Code; plugin-qualified `/h-mode:h-mode off` is also recognized.
 
+Explicit activation works even with `H_MODE_DEFAULT_MODE=off`. Resume, clear,
+and compaction preserve the current on/off choice; a new startup applies the
+configured default. Both statuslines hide the badge while off.
+
 ## Hooks and limits
 
 Claude Code integration includes `SessionStart`, `UserPromptSubmit`, and
@@ -99,6 +103,7 @@ H_MODE_UPDATE_CHECK=0
 ```
 
 All original compression tuning options remain under the `H_MODE_` prefix.
+The default controls startup, not whether an explicit activation command works.
 The session-start update notice checks this repository's GitHub releases, cached
 for three days; it sends no prompts or source code. The compressor itself makes
 no network or model calls. [Security and limitations](SECURITY.md).

@@ -3,9 +3,9 @@
 // Handles /h-mode commands, natural language activation/deactivation, and
 // per-turn reinforcement.
 
-const fs = require('fs');
 const path = require('path');
-const { getDefaultMode, getClaudeDir, safeWriteFlag, readFlag } = require('./h-mode-config');
+const { getClaudeDir, safeWriteFlag, readFlag } = require('./h-mode-config');
+const { reminder } = require('./h-mode-instructions.json');
 
 const claudeDir = getClaudeDir();
 const flagPath = path.join(claudeDir, '.h-mode-active');
@@ -17,40 +17,35 @@ process.stdin.on('end', () => {
     const data = JSON.parse(input.replace(/^﻿/, ''));
     const prompt = (data.prompt || '').trim();
     const promptLower = prompt.toLowerCase();
+    // Only direct requests control persistent mode. Do not scan questions,
+    // negations, or quoted examples for activation/deactivation words.
+    const request = promptLower.replace(/^(?:please\s+)?(?:(?:can|could|would)\s+you\s+(?:please\s+)?)?/, '');
     // One-shot audit/review/help commands must not activate the persistent mode.
-    if (/^\/(?:h-mode:)?h-mode-(?:audit|review|help)(?:\s|$)/.test(promptLower)) return;
+    if (/^\/(?:h-mode:)?h-mode-(?:audit|review|help)(?=$|[\s.!?,;:])/.test(request) ||
+        /^(?:(?:activate|enable|turn on|start|use)\s+)?h-mode[ -](?:audit|review|help)(?=$|[\s.!?,;:])/.test(request)) return;
 
-    // Natural language activation
-    if (/\b(activate|enable|turn on|start|use)\b.*\bh-mode\b/i.test(promptLower) ||
-        /\bh-mode\b.*\b(mode|activate|enable|on)\b/i.test(promptLower) ||
-        /\bh-modify\b/i.test(promptLower)) {
-      if (!/\b(stop|disable|turn off|deactivate|off)\b/i.test(promptLower)) {
-        const mode = getDefaultMode();
-        if (mode !== 'off') safeWriteFlag(flagPath, mode);
-      }
-    }
+    // Bare selectors may carry courtesy or scope ("normal mode please",
+    // "h-mode off for this task"). Strip only these suffixes, not arbitrary
+    // trailing prose such as "h-mode off means what?". Apply this to on and off.
+    const selector = request.replace(/(?:,?\s+please)?(?:\s+for\s+(?:now|(?:this|that|my|our|the(?:\s+current)?|current)\s+(?:task|session|request|conversation|turn)))?(?:,?\s+please)?[.!?]*$/, '');
 
-    // /h-mode slash commands. No level argument any more: /h-mode on,
-    // /h-mode off, nothing else.
+    // Slash commands retain legacy level arguments as activation aliases.
     if (/^\/(?:h-mode:)?h-mode(?:\s|$)/.test(promptLower)) {
       const parts = promptLower.split(/\s+/);
-      const arg = parts[1] || '';
-      if (arg === 'off' || arg === 'stop' || arg === 'disable') {
-        try { fs.unlinkSync(flagPath); } catch (e) {}
+      const arg = (parts[1] || '').replace(/[.!?,;:]+$/, '');
+      if (arg === 'off' || arg === 'stop' || arg === 'disable' || arg === 'deactivate') {
+        safeWriteFlag(flagPath, 'off');
       } else {
-        const mode = getDefaultMode();
-        if (mode !== 'off') safeWriteFlag(flagPath, mode);
+        safeWriteFlag(flagPath, 'on');
       }
-    }
-
-    // Natural language deactivation.
-    // Only fire when the off-verb actually targets h-mode — NOT when h-mode merely
-    // appears in a sentence that also mentions turning something else off.
-    // ("use h-mode to turn off the logger" must NOT deactivate.)
-    if (/\b(turn off|disable|deactivate|stop|kill|exit)\s+h-mode\b/i.test(promptLower) ||
-        /\bh-mode\s+(mode\s+)?(off|stop|disable|deactivate)\b/i.test(promptLower) ||
-        /\bnormal mode\b/i.test(promptLower)) {
-      try { fs.unlinkSync(flagPath); } catch (e) {}
+    } else if (/^(?:turn off|disable|deactivate|stop|kill|exit)\s+h-mode(?=$|[\s.!?,;:])/.test(request) ||
+        /^(?:h-mode\s+(?:mode\s+)?(?:off|stop|disable|deactivate)|normal mode)$/.test(selector)) {
+      safeWriteFlag(flagPath, 'off');
+    } else if (/^(?:(?:activate|enable|turn on|start|use)\s+h-mode|h-modify)(?=$|[\s.!?,;:])/.test(request) ||
+        /^h-mode\s+(?:mode(?:\s+on)?|activate|enable|on)$/.test(selector)) {
+      // The target boundary excludes h-mode-audit/review/help. Off/stop words
+      // later in the task (e.g. "use h-mode to turn off the logger") are unrelated.
+      safeWriteFlag(flagPath, 'on');
     }
 
     // Per-turn reinforcement
@@ -60,11 +55,7 @@ process.stdin.on('end', () => {
       process.stdout.write(JSON.stringify({
         hookSpecificOutput: {
           hookEventName: 'UserPromptSubmit',
-          additionalContext:
-            'H-MODE ACTIVE. ' +
-            'Prose: drop articles/filler/pleasantries/hedging. Fragments OK. ' +
-            'Code: YAGNI ladder first (reuse → stdlib → native → dep → one line → min code). ' +
-            'Code/commits/security: write normal.'
+          additionalContext: reminder
         }
       }));
     }
