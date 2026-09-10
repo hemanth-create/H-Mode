@@ -1,0 +1,21 @@
+{
+  "name": "h-mode",
+  "version": "2.0.0",
+  "description": "Concise coding, context efficiency, and read-only audit and review skills.",
+  "author": {
+    "name": "Hemanth",
+    "url": "https://github.com/hemanth-create"
+  },
+  "skills": "./skills/",
+  "repository": "https://github.com/hemanth-create/H-Mode",
+  "license": "MIT",
+  "interface": {
+    "displayName": "H-Mode",
+    "shortDescription": "Efficient coding, audit, review, and help.",
+    "longDescription": "Four H-Mode skills: efficient coding, code-and-prose audits, over-engineering reviews, and usage help. Claude-specific hooks ship separately and are not advertised as Codex runtime hooks.",
+    "developerName": "Hemanth",
+    "category": "Productivity",
+    "capabilities": [],
+    "defaultPrompt": "Use $h-mode-help to explain the available commands."
+  }
+}

@@ -1,0 +1,1388 @@
+{
+  "upstream_repository": "JayPokale/Chisle",
+  "upstream_commit": "80cd8e1fac7bf485e4411c2a3b645edfa17cebd5",
+  "destination_repository": "hemanth-create/H-Mode",
+  "source_blob_count": 197,
+  "notes": "Every source blob is accounted for. Source hashes identify the frozen upstream input, not modified H-Mode output. Archived PNGs preserve original bytes; active artwork is separately rebranded. Changes and platform limits are documented in upstream-parity.md.",
+  "files": [
+    {
+      "source": ".claude-plugin/marketplace.json",
+      "source_blob_sha": "c755b8f0f73d163cb594e3a7ff665caf31c4ddcf",
+      "destination": ".claude-plugin/marketplace.json",
+      "disposition": "adapted-or-retained",
+      "mode": "100644"
+    },
+    {
+      "source": ".claude-plugin/plugin.json",
+      "source_blob_sha": "907ffbf24d9546276e36cec8ca34847942da8bb0",
+      "destination": ".claude-plugin/plugin.json",
+      "disposition": "adapted-or-retained",
+      "mode": "100644"
+    },
+    {
+      "source": ".clinerules/chisle.md",
+      "source_blob_sha": "0c9eb999760da5ec5ae8f2b6e70cc45624e3c99c",
+      "destination": ".clinerules/h-mode.md",
+      "disposition": "adapted-or-retained",
+      "mode": "100644"
+    },
+    {
+      "source": ".codex-plugin/plugin.json",
+      "source_blob_sha": "52d7b1dab17c4534f76f3a2d38c53f4967fbacd9",
+      "destination": ".codex-plugin/plugin.json",
+      "disposition": "adapted-or-retained",
+      "mode": "100644"
+    },
+    {
+      "source": ".cursor/rules/chisle.mdc",
+      "source_blob_sha": "bee1689482ff22d52603ecf7f1313463bce396b0",
+      "destination": ".cursor/rules/h-mode.mdc",
+      "disposition": "adapted-or-retained",
+      "mode": "100644"
+    },
+    {
+      "source": ".github/CODEOWNERS",
+      "source_blob_sha": "c0527ea1b4f0ed91c3dd2dfcc0311f3010bf2f66",
+      "destination": ".github/CODEOWNERS",
+      "disposition": "adapted-or-retained",
+      "mode": "100644"
+    },
+    {
+      "source": ".github/copilot-instructions.md",
+      "source_blob_sha": "0c9eb999760da5ec5ae8f2b6e70cc45624e3c99c",
+      "destination": ".github/copilot-instructions.md",
+      "disposition": "adapted-or-retained",
+      "mode": "100644"
+    },
+    {
+      "source": ".github/FUNDING.yml",
+      "source_blob_sha": "04e143a776d6367d65cfe0864010645f31b77a0b",
+      "destination": "docs/upstream-funding.yml",
+      "disposition": "adapted-or-retained",
+      "mode": "100644"
+    },
+    {
+      "source": ".github/ISSUE_TEMPLATE/bug_report.md",
+      "source_blob_sha": "bce78367443fd944b2355ed1e10a881da405c3fe",
+      "destination": ".github/ISSUE_TEMPLATE/bug_report.md",
+      "disposition": "adapted-or-retained",
+      "mode": "100644"
+    },
+    {
+      "source": ".github/ISSUE_TEMPLATE/feature_request.md",
+      "source_blob_sha": "5617507e49f3d26cae2880b3caddde35a2a43531",
+      "destination": ".github/ISSUE_TEMPLATE/feature_request.md",
+      "disposition": "adapted-or-retained",
+      "mode": "100644"
+    },
+    {
+      "source": ".github/plugin/marketplace.json",
+      "source_blob_sha": "c755b8f0f73d163cb594e3a7ff665caf31c4ddcf",
+      "destination": ".github/plugin/marketplace.json",
+      "disposition": "adapted-or-retained",
+      "mode": "100644"
+    },
+    {
+      "source": ".github/plugin/plugin.json",
+      "source_blob_sha": "101bc8d3b5224f994aca07a213903e33d3fa8e9a",
+      "destination": ".github/plugin/plugin.json",
+      "disposition": "adapted-or-retained",
+      "mode": "100644"
+    },
+    {
+      "source": ".github/PULL_REQUEST_TEMPLATE.md",
+      "source_blob_sha": "7403f5a4bf60f319c727ebafd40960620686b7aa",
+      "destination": ".github/PULL_REQUEST_TEMPLATE.md",
+      "disposition": "adapted-or-retained",
+      "mode": "100644"
+    },
+    {
+      "source": ".github/workflows/publish.yml",
+      "source_blob_sha": "024c1bdcc60b4bbf0ffdab1331a054b116c53e87",
+      "destination": ".github/workflows/publish.yml",
+      "disposition": "adapted-or-retained",
+      "mode": "100644"
+    },
+    {
+      "source": ".github/workflows/test.yml",
+      "source_blob_sha": "f01b52523daa12b0c90806fe6aea48d73695f701",
+      "destination": ".github/workflows/test.yml",
+      "disposition": "adapted-or-retained",
+      "mode": "100644"
+    },
+    {
+      "source": ".gitignore",
+      "source_blob_sha": "82ef3f64fef2712856710f1362aeecea3d95fabb",
+      "destination": ".gitignore",
+      "disposition": "adapted-or-retained",
+      "mode": "100644"
+    },
+    {
+      "source": ".kiro/steering/chisle.md",
+      "source_blob_sha": "468525fa0f03e04dbfa9701e530ea7b1b60ec7ae",
+      "destination": ".kiro/steering/h-mode.md",
+      "disposition": "adapted-or-retained",
+      "mode": "100644"
+    },
+    {
+      "source": ".windsurf/rules/chisle.md",
+      "source_blob_sha": "c4b70b9c360011beca014414a36981f47c986eb1",
+      "destination": ".windsurf/rules/h-mode.md",
+      "disposition": "adapted-or-retained",
+      "mode": "100644"
+    },
+    {
+      "source": "AGENTS.md",
+      "source_blob_sha": "d775d7e31cbb67f48f56a918aea1a94bbfade203",
+      "destination": "AGENTS.md",
+      "disposition": "adapted-or-retained",
+      "mode": "100644"
+    },
+    {
+      "source": "assets/badge.svg",
+      "source_blob_sha": "ae104a871993f1959227510b55ac6c35c219e73e",
+      "destination": "assets/badge.svg",
+      "disposition": "adapted-or-retained",
+      "mode": "100644"
+    },
+    {
+      "source": "assets/benchmark.svg",
+      "source_blob_sha": "f402ac31e8d02730ed661d1558a308fed775b4a2",
+      "destination": "assets/benchmark.svg",
+      "disposition": "adapted-or-retained",
+      "mode": "100644"
+    },
+    {
+      "source": "assets/by-kind.svg",
+      "source_blob_sha": "219375df7d8bc7023390316d14ce649256227756",
+      "destination": "assets/by-kind.svg",
+      "disposition": "adapted-or-retained",
+      "mode": "100644"
+    },
+    {
+      "source": "assets/by-size.svg",
+      "source_blob_sha": "f50178b3138bf171b2600fde44852e385b451594",
+      "destination": "assets/by-size.svg",
+      "disposition": "adapted-or-retained",
+      "mode": "100644"
+    },
+    {
+      "source": "assets/logo.png",
+      "source_blob_sha": "70cc6ff16592907d34d9b2605914bbcd0e50368c",
+      "destination": "docs/upstream-assets/assets/logo.png",
+      "disposition": "historical-preserved",
+      "mode": "100644"
+    },
+    {
+      "source": "assets/logo.svg",
+      "source_blob_sha": "e9e373cac2c45f33113a8bfb69454ba94860c537",
+      "destination": "assets/logo.svg",
+      "disposition": "adapted-or-retained",
+      "mode": "100644"
+    },
+    {
+      "source": "assets/per-task.svg",
+      "source_blob_sha": "c9d600f742bb1df4211854dd9da1cd722bd78461",
+      "destination": "assets/per-task.svg",
+      "disposition": "adapted-or-retained",
+      "mode": "100644"
+    },
+    {
+      "source": "assets/thumbnail.png",
+      "source_blob_sha": "b3d84ee0d124462046f7ffd2109109021c33c805",
+      "destination": "docs/upstream-assets/assets/thumbnail.png",
+      "disposition": "historical-preserved",
+      "mode": "100644"
+    },
+    {
+      "source": "benchmarks/aggregate.js",
+      "source_blob_sha": "2c419075cbc49d1cf37f153846c160280c56fd2b",
+      "destination": "benchmarks/aggregate.js",
+      "disposition": "adapted-or-retained",
+      "mode": "100644"
+    },
+    {
+      "source": "benchmarks/README.md",
+      "source_blob_sha": "a61d7d1348176f44a726d6481970e9d1cdf16848",
+      "destination": "benchmarks/README.md",
+      "disposition": "adapted-or-retained",
+      "mode": "100644"
+    },
+    {
+      "source": "benchmarks/replay-compress.js",
+      "source_blob_sha": "d16ca2326273d0dbcccc1152fca8876e91c1937e",
+      "destination": "benchmarks/replay-compress.js",
+      "disposition": "adapted-or-retained",
+      "mode": "100644"
+    },
+    {
+      "source": "benchmarks/results/2026-06-29-live-4arm.md",
+      "source_blob_sha": "27649b368171a902e14e7ed267735bb278ef0a82",
+      "destination": "benchmarks/results/2026-06-29-live-4arm.md",
+      "disposition": "historical-preserved",
+      "mode": "100644"
+    },
+    {
+      "source": "benchmarks/results/2026-06-29-reliability.md",
+      "source_blob_sha": "a7b9283080b2fc83d3e8c255f3bd697a0331d2c9",
+      "destination": "benchmarks/results/2026-06-29-reliability.md",
+      "disposition": "historical-preserved",
+      "mode": "100644"
+    },
+    {
+      "source": "benchmarks/results/2026-06-29-sonnet-cross-check.md",
+      "source_blob_sha": "a25b4401866244e9104533c0148b753498834fec",
+      "destination": "benchmarks/results/2026-06-29-sonnet-cross-check.md",
+      "disposition": "historical-preserved",
+      "mode": "100644"
+    },
+    {
+      "source": "benchmarks/results/2026-07-07-input-axis.md",
+      "source_blob_sha": "26c550e15aa9963dfb987bb21a4d035407f06253",
+      "destination": "benchmarks/results/2026-07-07-input-axis.md",
+      "disposition": "historical-preserved",
+      "mode": "100644"
+    },
+    {
+      "source": "benchmarks/results/2026-07-07-verify-rerun.md",
+      "source_blob_sha": "7186ae8c5e10231f02052795a34c36203cae9087",
+      "destination": "benchmarks/results/2026-07-07-verify-rerun.md",
+      "disposition": "historical-preserved",
+      "mode": "100644"
+    },
+    {
+      "source": "benchmarks/results/raw-sonnet/caching__caveman.json",
+      "source_blob_sha": "47b31322737a6a9d6a5ad889dcdb2716d6382a37",
+      "destination": "benchmarks/results/raw-sonnet/caching__caveman.json",
+      "disposition": "historical-preserved",
+      "mode": "100644"
+    },
+    {
+      "source": "benchmarks/results/raw-sonnet/caching__rdxmin.json",
+      "source_blob_sha": "30cb7b626a0239273b451ed46390333e6de506df",
+      "destination": "benchmarks/results/raw-sonnet/caching__rdxmin.json",
+      "disposition": "historical-preserved",
+      "mode": "100644"
+    },
+    {
+      "source": "benchmarks/results/raw-sonnet/deadlock__caveman.json",
+      "source_blob_sha": "953925079d54a94029e947e05d722e8e7efa1b9c",
+      "destination": "benchmarks/results/raw-sonnet/deadlock__caveman.json",
+      "disposition": "historical-preserved",
+      "mode": "100644"
+    },
+    {
+      "source": "benchmarks/results/raw-sonnet/deadlock__ponytail.json",
+      "source_blob_sha": "74917600400a366952f4fba1a53a934a429369cd",
+      "destination": "benchmarks/results/raw-sonnet/deadlock__ponytail.json",
+      "disposition": "historical-preserved",
+      "mode": "100644"
+    },
+    {
+      "source": "benchmarks/results/raw-sonnet/deadlock__rdxmin.json",
+      "source_blob_sha": "a513b7dd831f1aeeb57f968192a603d0e32abbe9",
+      "destination": "benchmarks/results/raw-sonnet/deadlock__rdxmin.json",
+      "disposition": "historical-preserved",
+      "mode": "100644"
+    },
+    {
+      "source": "benchmarks/results/raw-sonnet/deadlock__vanilla.json",
+      "source_blob_sha": "7507a8830940bf47bc773f22b216c9feea8302aa",
+      "destination": "benchmarks/results/raw-sonnet/deadlock__vanilla.json",
+      "disposition": "historical-preserved",
+      "mode": "100644"
+    },
+    {
+      "source": "benchmarks/results/raw-sonnet/letconst__caveman.json",
+      "source_blob_sha": "c88a3e63ea15f661301d12b3c5f9e412db1c36db",
+      "destination": "benchmarks/results/raw-sonnet/letconst__caveman.json",
+      "disposition": "historical-preserved",
+      "mode": "100644"
+    },
+    {
+      "source": "benchmarks/results/raw-sonnet/letconst__ponytail.json",
+      "source_blob_sha": "0208003c4b52fa7a52725c4ed72c819521246b00",
+      "destination": "benchmarks/results/raw-sonnet/letconst__ponytail.json",
+      "disposition": "historical-preserved",
+      "mode": "100644"
+    },
+    {
+      "source": "benchmarks/results/raw-sonnet/letconst__rdxmin.json",
+      "source_blob_sha": "f2f4017a1357d1ebd260d63e73b5bf95fb2c3610",
+      "destination": "benchmarks/results/raw-sonnet/letconst__rdxmin.json",
+      "disposition": "historical-preserved",
+      "mode": "100644"
+    },
+    {
+      "source": "benchmarks/results/raw-sonnet/letconst__vanilla.json",
+      "source_blob_sha": "c7b4ecba4d074db311eb8e72fea76b1f7b413f30",
+      "destination": "benchmarks/results/raw-sonnet/letconst__vanilla.json",
+      "disposition": "historical-preserved",
+      "mode": "100644"
+    },
+    {
+      "source": "benchmarks/results/raw-sonnet/mixed__caveman.json",
+      "source_blob_sha": "d7a9ee01b3fd69ef7e56642a62e2ae40e51f06f5",
+      "destination": "benchmarks/results/raw-sonnet/mixed__caveman.json",
+      "disposition": "historical-preserved",
+      "mode": "100644"
+    },
+    {
+      "source": "benchmarks/results/raw-sonnet/mixed__ponytail.json",
+      "source_blob_sha": "fcd7a4441de7b43c79b9aa4275148c4d0fdc7e68",
+      "destination": "benchmarks/results/raw-sonnet/mixed__ponytail.json",
+      "disposition": "historical-preserved",
+      "mode": "100644"
+    },
+    {
+      "source": "benchmarks/results/raw-sonnet/mixed__rdxmin.json",
+      "source_blob_sha": "a3eb97bf842e0a42d71920bb60924660147809b8",
+      "destination": "benchmarks/results/raw-sonnet/mixed__rdxmin.json",
+      "disposition": "historical-preserved",
+      "mode": "100644"
+    },
+    {
+      "source": "benchmarks/results/raw-sonnet/mixed__vanilla.json",
+      "source_blob_sha": "8f64ba0ca247ad8910a18fa4bdfd946de059d854",
+      "destination": "benchmarks/results/raw-sonnet/mixed__vanilla.json",
+      "disposition": "historical-preserved",
+      "mode": "100644"
+    },
+    {
+      "source": "benchmarks/results/raw-sonnet/palindrome__caveman.json",
+      "source_blob_sha": "650633b867ea06f6cfad2c7653b154f88fa75a51",
+      "destination": "benchmarks/results/raw-sonnet/palindrome__caveman.json",
+      "disposition": "historical-preserved",
+      "mode": "100644"
+    },
+    {
+      "source": "benchmarks/results/raw-sonnet/palindrome__ponytail.json",
+      "source_blob_sha": "1462345473dbb4e6d8843a41d36ee1478777515d",
+      "destination": "benchmarks/results/raw-sonnet/palindrome__ponytail.json",
+      "disposition": "historical-preserved",
+      "mode": "100644"
+    },
+    {
+      "source": "benchmarks/results/raw-sonnet/palindrome__rdxmin.json",
+      "source_blob_sha": "0cff96384c91962048e262bfedd162edf9215c5d",
+      "destination": "benchmarks/results/raw-sonnet/palindrome__rdxmin.json",
+      "disposition": "historical-preserved",
+      "mode": "100644"
+    },
+    {
+      "source": "benchmarks/results/raw-sonnet/palindrome__vanilla.json",
+      "source_blob_sha": "558bfc390ce8c75b2b15089f7fc6f8f847ded7c9",
+      "destination": "benchmarks/results/raw-sonnet/palindrome__vanilla.json",
+      "disposition": "historical-preserved",
+      "mode": "100644"
+    },
+    {
+      "source": "benchmarks/results/raw-sonnet/ratelimit__caveman.json",
+      "source_blob_sha": "f7bf8e661cdeb5aca77546cb8a4d2da1e40481eb",
+      "destination": "benchmarks/results/raw-sonnet/ratelimit__caveman.json",
+      "disposition": "historical-preserved",
+      "mode": "100644"
+    },
+    {
+      "source": "benchmarks/results/raw-sonnet/ratelimit__cavepony.json",
+      "source_blob_sha": "e14884cc50e5e2f833f3f1f0750506bb5640db17",
+      "destination": "benchmarks/results/raw-sonnet/ratelimit__cavepony.json",
+      "disposition": "historical-preserved",
+      "mode": "100644"
+    },
+    {
+      "source": "benchmarks/results/raw-sonnet/ratelimit__ponytail.json",
+      "source_blob_sha": "e1da6e42519b5a3b50d719719c4dcf864adb02d7",
+      "destination": "benchmarks/results/raw-sonnet/ratelimit__ponytail.json",
+      "disposition": "historical-preserved",
+      "mode": "100644"
+    },
+    {
+      "source": "benchmarks/results/raw-sonnet/ratelimit__rdxmin.json",
+      "source_blob_sha": "9af669a29d68b194fb5250a002dc31514a24f424",
+      "destination": "benchmarks/results/raw-sonnet/ratelimit__rdxmin.json",
+      "disposition": "historical-preserved",
+      "mode": "100644"
+    },
+    {
+      "source": "benchmarks/results/raw-sonnet/ratelimit__vanilla.json",
+      "source_blob_sha": "022098eaf689435913a8b04c7c27819f5ca893cc",
+      "destination": "benchmarks/results/raw-sonnet/ratelimit__vanilla.json",
+      "disposition": "historical-preserved",
+      "mode": "100644"
+    },
+    {
+      "source": "benchmarks/results/raw-sonnet/retry__caveman.json",
+      "source_blob_sha": "ee44d59972ad982a0d200cb791930013bd8a9954",
+      "destination": "benchmarks/results/raw-sonnet/retry__caveman.json",
+      "disposition": "historical-preserved",
+      "mode": "100644"
+    },
+    {
+      "source": "benchmarks/results/raw-sonnet/retry__ponytail.json",
+      "source_blob_sha": "1d6f16f1280fb0b698397c346df04a4adc6848f7",
+      "destination": "benchmarks/results/raw-sonnet/retry__ponytail.json",
+      "disposition": "historical-preserved",
+      "mode": "100644"
+    },
+    {
+      "source": "benchmarks/results/raw-sonnet/retry__rdxmin.json",
+      "source_blob_sha": "5fcb66dd87114558430d5692792c650c060df7e4",
+      "destination": "benchmarks/results/raw-sonnet/retry__rdxmin.json",
+      "disposition": "historical-preserved",
+      "mode": "100644"
+    },
+    {
+      "source": "benchmarks/results/raw-sonnet/retry__vanilla.json",
+      "source_blob_sha": "782385dab00d348733f92c5817281e3c97937c45",
+      "destination": "benchmarks/results/raw-sonnet/retry__vanilla.json",
+      "disposition": "historical-preserved",
+      "mode": "100644"
+    },
+    {
+      "source": "benchmarks/results/raw-sonnet/signup__caveman.json",
+      "source_blob_sha": "11195aa3a4383c0cadc889612aa49c341e52ee98",
+      "destination": "benchmarks/results/raw-sonnet/signup__caveman.json",
+      "disposition": "historical-preserved",
+      "mode": "100644"
+    },
+    {
+      "source": "benchmarks/results/raw-sonnet/signup__ponytail.json",
+      "source_blob_sha": "fca0c84bfa43d972753a7133a4e76c25b3b3291e",
+      "destination": "benchmarks/results/raw-sonnet/signup__ponytail.json",
+      "disposition": "historical-preserved",
+      "mode": "100644"
+    },
+    {
+      "source": "benchmarks/results/raw-sonnet/signup__rdxmin.json",
+      "source_blob_sha": "d66595da0f9034be3c277cad34554877b18448e4",
+      "destination": "benchmarks/results/raw-sonnet/signup__rdxmin.json",
+      "disposition": "historical-preserved",
+      "mode": "100644"
+    },
+    {
+      "source": "benchmarks/results/raw-sonnet/signup__vanilla.json",
+      "source_blob_sha": "724a967dce0d0ce1a3d7034f1d6add8f2450bb33",
+      "destination": "benchmarks/results/raw-sonnet/signup__vanilla.json",
+      "disposition": "historical-preserved",
+      "mode": "100644"
+    },
+    {
+      "source": "benchmarks/results/raw-sonnet/thread__caveman.json",
+      "source_blob_sha": "1c52753ebf32b90eda6f6bb15a6fa7a7d21e0e07",
+      "destination": "benchmarks/results/raw-sonnet/thread__caveman.json",
+      "disposition": "historical-preserved",
+      "mode": "100644"
+    },
+    {
+      "source": "benchmarks/results/raw-sonnet/thread__ponytail.json",
+      "source_blob_sha": "3a7b10ee8e9276b8631106c33312c55670318070",
+      "destination": "benchmarks/results/raw-sonnet/thread__ponytail.json",
+      "disposition": "historical-preserved",
+      "mode": "100644"
+    },
+    {
+      "source": "benchmarks/results/raw-sonnet/thread__rdxmin.json",
+      "source_blob_sha": "0eed041719dc8fdcfeeb665bfb9d62e84cab0591",
+      "destination": "benchmarks/results/raw-sonnet/thread__rdxmin.json",
+      "disposition": "historical-preserved",
+      "mode": "100644"
+    },
+    {
+      "source": "benchmarks/results/raw-sonnet/thread__vanilla.json",
+      "source_blob_sha": "6d0d03f893901661d41acf128eeb1aa672e2c34c",
+      "destination": "benchmarks/results/raw-sonnet/thread__vanilla.json",
+      "disposition": "historical-preserved",
+      "mode": "100644"
+    },
+    {
+      "source": "benchmarks/results/raw-verify/auth-bug__caveman.json",
+      "source_blob_sha": "7b77a1e8b99a386c8ba4a262db4792aeb5bfcc04",
+      "destination": "benchmarks/results/raw-verify/auth-bug__caveman.json",
+      "disposition": "historical-preserved",
+      "mode": "100644"
+    },
+    {
+      "source": "benchmarks/results/raw-verify/auth-bug__ponytail.json",
+      "source_blob_sha": "bca473e148ff6e4bc710de714ffb8f1d71d61368",
+      "destination": "benchmarks/results/raw-verify/auth-bug__ponytail.json",
+      "disposition": "historical-preserved",
+      "mode": "100644"
+    },
+    {
+      "source": "benchmarks/results/raw-verify/auth-bug__rdxmin.json",
+      "source_blob_sha": "ef792bb4a9c44937b13f32eaa94d6c0fad0a164b",
+      "destination": "benchmarks/results/raw-verify/auth-bug__rdxmin.json",
+      "disposition": "historical-preserved",
+      "mode": "100644"
+    },
+    {
+      "source": "benchmarks/results/raw-verify/auth-bug__vanilla.json",
+      "source_blob_sha": "955554d07608d705d146ee81f1ed83c515b76b92",
+      "destination": "benchmarks/results/raw-verify/auth-bug__vanilla.json",
+      "disposition": "historical-preserved",
+      "mode": "100644"
+    },
+    {
+      "source": "benchmarks/results/raw-verify/cache__caveman.json",
+      "source_blob_sha": "3b22bbf821db53a23e7bb84262c59ae6020bbbef",
+      "destination": "benchmarks/results/raw-verify/cache__caveman.json",
+      "disposition": "historical-preserved",
+      "mode": "100644"
+    },
+    {
+      "source": "benchmarks/results/raw-verify/cache__ponytail.json",
+      "source_blob_sha": "2138e0d2d331d6aefb1a2c48be38ec2cb9a74329",
+      "destination": "benchmarks/results/raw-verify/cache__ponytail.json",
+      "disposition": "historical-preserved",
+      "mode": "100644"
+    },
+    {
+      "source": "benchmarks/results/raw-verify/cache__rdxmin.json",
+      "source_blob_sha": "184c2866fe97789efcaee6f6395adce12008f985",
+      "destination": "benchmarks/results/raw-verify/cache__rdxmin.json",
+      "disposition": "historical-preserved",
+      "mode": "100644"
+    },
+    {
+      "source": "benchmarks/results/raw-verify/cache__vanilla.json",
+      "source_blob_sha": "411082694d116931a871aa0e76f92142cbc04312",
+      "destination": "benchmarks/results/raw-verify/cache__vanilla.json",
+      "disposition": "historical-preserved",
+      "mode": "100644"
+    },
+    {
+      "source": "benchmarks/results/raw-verify/debounce__caveman.json",
+      "source_blob_sha": "c4c9d5188f311a1edae8413a7eb78ec303432041",
+      "destination": "benchmarks/results/raw-verify/debounce__caveman.json",
+      "disposition": "historical-preserved",
+      "mode": "100644"
+    },
+    {
+      "source": "benchmarks/results/raw-verify/debounce__ponytail.json",
+      "source_blob_sha": "90d1dbae5f7b3e36d016922b4ae1b66b21dabce3",
+      "destination": "benchmarks/results/raw-verify/debounce__ponytail.json",
+      "disposition": "historical-preserved",
+      "mode": "100644"
+    },
+    {
+      "source": "benchmarks/results/raw-verify/debounce__rdxmin.json",
+      "source_blob_sha": "e677daabc60e06f88162ff9bcd28692285f1b1d8",
+      "destination": "benchmarks/results/raw-verify/debounce__rdxmin.json",
+      "disposition": "historical-preserved",
+      "mode": "100644"
+    },
+    {
+      "source": "benchmarks/results/raw-verify/debounce__vanilla.json",
+      "source_blob_sha": "b48ec98e723830ac9a259735061a69c20705eeff",
+      "destination": "benchmarks/results/raw-verify/debounce__vanilla.json",
+      "disposition": "historical-preserved",
+      "mode": "100644"
+    },
+    {
+      "source": "benchmarks/results/raw-verify/pooling__caveman.json",
+      "source_blob_sha": "f11aab4990c49f1106f85390400c22486d3bd8bb",
+      "destination": "benchmarks/results/raw-verify/pooling__caveman.json",
+      "disposition": "historical-preserved",
+      "mode": "100644"
+    },
+    {
+      "source": "benchmarks/results/raw-verify/pooling__ponytail.json",
+      "source_blob_sha": "fdd1d7344fcd0fca378a0b07d7336e7e79d70c1d",
+      "destination": "benchmarks/results/raw-verify/pooling__ponytail.json",
+      "disposition": "historical-preserved",
+      "mode": "100644"
+    },
+    {
+      "source": "benchmarks/results/raw-verify/pooling__rdxmin.json",
+      "source_blob_sha": "f2879b12580e0b14ca6f76eab248bb003350d95d",
+      "destination": "benchmarks/results/raw-verify/pooling__rdxmin.json",
+      "disposition": "historical-preserved",
+      "mode": "100644"
+    },
+    {
+      "source": "benchmarks/results/raw-verify/pooling__vanilla.json",
+      "source_blob_sha": "71441d896a9ceb1092fae247d8e16cef383e2b97",
+      "destination": "benchmarks/results/raw-verify/pooling__vanilla.json",
+      "disposition": "historical-preserved",
+      "mode": "100644"
+    },
+    {
+      "source": "benchmarks/results/raw-verify/regex-concept__caveman.json",
+      "source_blob_sha": "2b8ffde8284a005effd2c5863acc46ab050802c4",
+      "destination": "benchmarks/results/raw-verify/regex-concept__caveman.json",
+      "disposition": "historical-preserved",
+      "mode": "100644"
+    },
+    {
+      "source": "benchmarks/results/raw-verify/regex-concept__ponytail.json",
+      "source_blob_sha": "15e0fe303e47fc48614f98075157d62dd108c0f5",
+      "destination": "benchmarks/results/raw-verify/regex-concept__ponytail.json",
+      "disposition": "historical-preserved",
+      "mode": "100644"
+    },
+    {
+      "source": "benchmarks/results/raw-verify/regex-concept__rdxmin.json",
+      "source_blob_sha": "2356afd8645be611e1d1ad87a2c8758734d8b605",
+      "destination": "benchmarks/results/raw-verify/regex-concept__rdxmin.json",
+      "disposition": "historical-preserved",
+      "mode": "100644"
+    },
+    {
+      "source": "benchmarks/results/raw-verify/regex-concept__vanilla.json",
+      "source_blob_sha": "b31f6a5c1a62fa8cbf3f09f4fed3d88f4eaf804e",
+      "destination": "benchmarks/results/raw-verify/regex-concept__vanilla.json",
+      "disposition": "historical-preserved",
+      "mode": "100644"
+    },
+    {
+      "source": "benchmarks/results/raw-verify/rest-graphql__caveman.json",
+      "source_blob_sha": "ecd1584b7a6cb02969d7604372a731bc4df02085",
+      "destination": "benchmarks/results/raw-verify/rest-graphql__caveman.json",
+      "disposition": "historical-preserved",
+      "mode": "100644"
+    },
+    {
+      "source": "benchmarks/results/raw-verify/rest-graphql__ponytail.json",
+      "source_blob_sha": "209715648c2fee3d4bde3f700b33a8ad4048172a",
+      "destination": "benchmarks/results/raw-verify/rest-graphql__ponytail.json",
+      "disposition": "historical-preserved",
+      "mode": "100644"
+    },
+    {
+      "source": "benchmarks/results/raw-verify/rest-graphql__rdxmin.json",
+      "source_blob_sha": "b86f66ba5eb1461dbdccbde9d4f36940314f701a",
+      "destination": "benchmarks/results/raw-verify/rest-graphql__rdxmin.json",
+      "disposition": "historical-preserved",
+      "mode": "100644"
+    },
+    {
+      "source": "benchmarks/results/raw-verify/rest-graphql__vanilla.json",
+      "source_blob_sha": "b2a39f91c5d0b08da9f833028076aae3c1d08189",
+      "destination": "benchmarks/results/raw-verify/rest-graphql__vanilla.json",
+      "disposition": "historical-preserved",
+      "mode": "100644"
+    },
+    {
+      "source": "benchmarks/results/raw/auth-bug__caveman.json",
+      "source_blob_sha": "a96d508ae6919931051a70ffef13047e76cda4c9",
+      "destination": "benchmarks/results/raw/auth-bug__caveman.json",
+      "disposition": "historical-preserved",
+      "mode": "100644"
+    },
+    {
+      "source": "benchmarks/results/raw/auth-bug__ponytail.json",
+      "source_blob_sha": "6b80b37a147f71c3e7ddecbee7116b2ff07fe12b",
+      "destination": "benchmarks/results/raw/auth-bug__ponytail.json",
+      "disposition": "historical-preserved",
+      "mode": "100644"
+    },
+    {
+      "source": "benchmarks/results/raw/auth-bug__rdxmin.json",
+      "source_blob_sha": "be19af886b3cadb2e44ffbc3ff5b791f4a508e18",
+      "destination": "benchmarks/results/raw/auth-bug__rdxmin.json",
+      "disposition": "historical-preserved",
+      "mode": "100644"
+    },
+    {
+      "source": "benchmarks/results/raw/auth-bug__vanilla.json",
+      "source_blob_sha": "1671bb24edd674b363d2d40ee562d92d79776139",
+      "destination": "benchmarks/results/raw/auth-bug__vanilla.json",
+      "disposition": "historical-preserved",
+      "mode": "100644"
+    },
+    {
+      "source": "benchmarks/results/raw/cache__caveman.json",
+      "source_blob_sha": "2cc60cf1fc4df10bc51329ab68ddb8a73d63bd80",
+      "destination": "benchmarks/results/raw/cache__caveman.json",
+      "disposition": "historical-preserved",
+      "mode": "100644"
+    },
+    {
+      "source": "benchmarks/results/raw/cache__ponytail.json",
+      "source_blob_sha": "f8c767f26844e093f8ce95cb0e1c177036017ae5",
+      "destination": "benchmarks/results/raw/cache__ponytail.json",
+      "disposition": "historical-preserved",
+      "mode": "100644"
+    },
+    {
+      "source": "benchmarks/results/raw/cache__rdxmin.json",
+      "source_blob_sha": "8551d2ad0d4ad31111e90d7c05b260376c484e62",
+      "destination": "benchmarks/results/raw/cache__rdxmin.json",
+      "disposition": "historical-preserved",
+      "mode": "100644"
+    },
+    {
+      "source": "benchmarks/results/raw/cache__vanilla.json",
+      "source_blob_sha": "b44dd6b6ba270c14056c9fd54ac3bf5045ba2852",
+      "destination": "benchmarks/results/raw/cache__vanilla.json",
+      "disposition": "historical-preserved",
+      "mode": "100644"
+    },
+    {
+      "source": "benchmarks/results/raw/debounce__caveman.json",
+      "source_blob_sha": "476ca661418d870a53ec7350ea963ffcbd32015e",
+      "destination": "benchmarks/results/raw/debounce__caveman.json",
+      "disposition": "historical-preserved",
+      "mode": "100644"
+    },
+    {
+      "source": "benchmarks/results/raw/debounce__ponytail.json",
+      "source_blob_sha": "834f142e08b69a0db0f4ee43cc589686eecf3608",
+      "destination": "benchmarks/results/raw/debounce__ponytail.json",
+      "disposition": "historical-preserved",
+      "mode": "100644"
+    },
+    {
+      "source": "benchmarks/results/raw/debounce__rdxmin.json",
+      "source_blob_sha": "3d0b1248a75042fd37cea8d367028bdcc2a1b62a",
+      "destination": "benchmarks/results/raw/debounce__rdxmin.json",
+      "disposition": "historical-preserved",
+      "mode": "100644"
+    },
+    {
+      "source": "benchmarks/results/raw/debounce__vanilla.json",
+      "source_blob_sha": "fc846da0a81fb0bdab477251627dd562d6b1eb4d",
+      "destination": "benchmarks/results/raw/debounce__vanilla.json",
+      "disposition": "historical-preserved",
+      "mode": "100644"
+    },
+    {
+      "source": "benchmarks/results/raw/pooling__caveman.json",
+      "source_blob_sha": "2505a9150371d8119ee2ad1b03cad4bf4fd3e6a2",
+      "destination": "benchmarks/results/raw/pooling__caveman.json",
+      "disposition": "historical-preserved",
+      "mode": "100644"
+    },
+    {
+      "source": "benchmarks/results/raw/pooling__ponytail.json",
+      "source_blob_sha": "9db2a52f826e43472037a9ed43dbf62a1110c646",
+      "destination": "benchmarks/results/raw/pooling__ponytail.json",
+      "disposition": "historical-preserved",
+      "mode": "100644"
+    },
+    {
+      "source": "benchmarks/results/raw/pooling__rdxmin.json",
+      "source_blob_sha": "4b8935c21232e5e31dfd57a3fa4fad3d3eca52d2",
+      "destination": "benchmarks/results/raw/pooling__rdxmin.json",
+      "disposition": "historical-preserved",
+      "mode": "100644"
+    },
+    {
+      "source": "benchmarks/results/raw/pooling__vanilla.json",
+      "source_blob_sha": "625c71663ae41d87eb51b6ee737f541d3cb4eb9c",
+      "destination": "benchmarks/results/raw/pooling__vanilla.json",
+      "disposition": "historical-preserved",
+      "mode": "100644"
+    },
+    {
+      "source": "benchmarks/results/raw/regex-concept__caveman.json",
+      "source_blob_sha": "1d4c14cc61f7b68ee51a1e2bfdb83e920944215b",
+      "destination": "benchmarks/results/raw/regex-concept__caveman.json",
+      "disposition": "historical-preserved",
+      "mode": "100644"
+    },
+    {
+      "source": "benchmarks/results/raw/regex-concept__ponytail.json",
+      "source_blob_sha": "53c0dca2049bca3503e1d2f12c04665243aeab01",
+      "destination": "benchmarks/results/raw/regex-concept__ponytail.json",
+      "disposition": "historical-preserved",
+      "mode": "100644"
+    },
+    {
+      "source": "benchmarks/results/raw/regex-concept__rdxmin.json",
+      "source_blob_sha": "d16e9b782bbb87d7df21d9e2bcf29eb47b893aef",
+      "destination": "benchmarks/results/raw/regex-concept__rdxmin.json",
+      "disposition": "historical-preserved",
+      "mode": "100644"
+    },
+    {
+      "source": "benchmarks/results/raw/regex-concept__vanilla.json",
+      "source_blob_sha": "2b8c14e19bad2d8bd17e592dfae4f2dc85125690",
+      "destination": "benchmarks/results/raw/regex-concept__vanilla.json",
+      "disposition": "historical-preserved",
+      "mode": "100644"
+    },
+    {
+      "source": "benchmarks/results/raw/rest-graphql__caveman.json",
+      "source_blob_sha": "c8ceb956f3d0ee55891fa47ad8619d62240fb1bf",
+      "destination": "benchmarks/results/raw/rest-graphql__caveman.json",
+      "disposition": "historical-preserved",
+      "mode": "100644"
+    },
+    {
+      "source": "benchmarks/results/raw/rest-graphql__ponytail.json",
+      "source_blob_sha": "f8a266c84fc65330451983051c8db02d7ab7c6fd",
+      "destination": "benchmarks/results/raw/rest-graphql__ponytail.json",
+      "disposition": "historical-preserved",
+      "mode": "100644"
+    },
+    {
+      "source": "benchmarks/results/raw/rest-graphql__rdxmin.json",
+      "source_blob_sha": "35e3cbd2c78bc475a75954e66fdfd50902b40696",
+      "destination": "benchmarks/results/raw/rest-graphql__rdxmin.json",
+      "disposition": "historical-preserved",
+      "mode": "100644"
+    },
+    {
+      "source": "benchmarks/results/raw/rest-graphql__vanilla.json",
+      "source_blob_sha": "8736f673ecd155437c500fd2c5f82e5e4cf57313",
+      "destination": "benchmarks/results/raw/rest-graphql__vanilla.json",
+      "disposition": "historical-preserved",
+      "mode": "100644"
+    },
+    {
+      "source": "benchmarks/run-live.sh",
+      "source_blob_sha": "bddf9b7d223f9bf63aa6e63077ace65b95079d9f",
+      "destination": "benchmarks/run-live.sh",
+      "disposition": "adapted-or-retained",
+      "mode": "100644"
+    },
+    {
+      "source": "bin/install.js",
+      "source_blob_sha": "4c8caa22f93d195d8de981de3a740309c5b7448a",
+      "destination": "bin/install.js",
+      "disposition": "adapted-or-retained",
+      "mode": "100755"
+    },
+    {
+      "source": "bin/lib/settings.js",
+      "source_blob_sha": "a3b656b0e15d33675faf6f67bd39cc03f6442b21",
+      "destination": "bin/lib/settings.js",
+      "disposition": "adapted-or-retained",
+      "mode": "100644"
+    },
+    {
+      "source": "CHANGELOG.md",
+      "source_blob_sha": "49fc0a8e47fa57d1bf62687b93d41e957c16a8f6",
+      "destination": "docs/upstream-changelog.md",
+      "disposition": "adapted-or-retained",
+      "mode": "100644"
+    },
+    {
+      "source": "CODE_OF_CONDUCT.md",
+      "source_blob_sha": "d1dd8f237aea0d653c9649d70e61eecdf868faff",
+      "destination": "CODE_OF_CONDUCT.md",
+      "disposition": "adapted-or-retained",
+      "mode": "100644"
+    },
+    {
+      "source": "commands/chisle-audit.toml",
+      "source_blob_sha": "14f02844c6296b332860609eae729381d56b9959",
+      "destination": "commands/h-mode-audit.toml",
+      "disposition": "adapted-or-retained",
+      "mode": "100644"
+    },
+    {
+      "source": "commands/chisle-help.toml",
+      "source_blob_sha": "8fa0988ecc93baf5fa398f49b62376e0f534908e",
+      "destination": "commands/h-mode-help.toml",
+      "disposition": "adapted-or-retained",
+      "mode": "100644"
+    },
+    {
+      "source": "commands/chisle-review.toml",
+      "source_blob_sha": "f4a5bf1a4984384ccb5219d61054447ff6a434aa",
+      "destination": "commands/h-mode-review.toml",
+      "disposition": "adapted-or-retained",
+      "mode": "100644"
+    },
+    {
+      "source": "commands/chisle.toml",
+      "source_blob_sha": "e326a8a677ce269d97368456f0076ff567651906",
+      "destination": "commands/h-mode.toml",
+      "disposition": "adapted-or-retained",
+      "mode": "100644"
+    },
+    {
+      "source": "CONTRIBUTING.md",
+      "source_blob_sha": "547347fce3a5968f557588c73cbec022d22b0b20",
+      "destination": "CONTRIBUTING.md",
+      "disposition": "adapted-or-retained",
+      "mode": "100644"
+    },
+    {
+      "source": "docs/agent-portability.md",
+      "source_blob_sha": "0caf1e6e427caf2c5e126fedaa045ca31a2503b3",
+      "destination": "docs/agent-portability.md",
+      "disposition": "adapted-or-retained",
+      "mode": "100644"
+    },
+    {
+      "source": "docs/comparison.md",
+      "source_blob_sha": "8a43dc2554f20b76692efe570b648397ac32d174",
+      "destination": "docs/upstream-comparison.md",
+      "disposition": "adapted-or-retained",
+      "mode": "100644"
+    },
+    {
+      "source": "docs/install-windows.md",
+      "source_blob_sha": "fee4e6382c4ee49874f942f63784412df8e4d753",
+      "destination": "docs/install-windows.md",
+      "disposition": "adapted-or-retained",
+      "mode": "100644"
+    },
+    {
+      "source": "docs/releasing.md",
+      "source_blob_sha": "aedd962c81031f0fb5b3e74b0f348c8aa1542f93",
+      "destination": "docs/releasing.md",
+      "disposition": "adapted-or-retained",
+      "mode": "100644"
+    },
+    {
+      "source": "gemini-extension.json",
+      "source_blob_sha": "87b90d549c36a373649f084bc24cd4d439196434",
+      "destination": "gemini-extension.json",
+      "disposition": "adapted-or-retained",
+      "mode": "100644"
+    },
+    {
+      "source": "GEMINI.md",
+      "source_blob_sha": "56e0b58307385af091b9fc0f036fe2d02d177d3e",
+      "destination": "GEMINI.md",
+      "disposition": "adapted-or-retained",
+      "mode": "100644"
+    },
+    {
+      "source": "hooks/chisle-activate.js",
+      "source_blob_sha": "f5446b1496762ea29ab0eb66fb9bd28496b01f61",
+      "destination": "hooks/h-mode-activate.js",
+      "disposition": "adapted-or-retained",
+      "mode": "100644"
+    },
+    {
+      "source": "hooks/chisle-compress-output.js",
+      "source_blob_sha": "c3d4fa965477eb96aa7dbf0e016f6ee6350f2588",
+      "destination": "hooks/h-mode-compress-output.js",
+      "disposition": "adapted-or-retained",
+      "mode": "100644"
+    },
+    {
+      "source": "hooks/chisle-config.js",
+      "source_blob_sha": "a1f35716f6ca67d8d94df6a6a69cd4a21b54549f",
+      "destination": "hooks/h-mode-config.js",
+      "disposition": "adapted-or-retained",
+      "mode": "100644"
+    },
+    {
+      "source": "hooks/chisle-mode-tracker.js",
+      "source_blob_sha": "406df96417c02cfbc9e503b509b516a03ca070f0",
+      "destination": "hooks/h-mode-mode-tracker.js",
+      "disposition": "adapted-or-retained",
+      "mode": "100644"
+    },
+    {
+      "source": "hooks/chisle-statusline.ps1",
+      "source_blob_sha": "ca7765951629b3a21b1ecf5d8d1d22f72424b2ea",
+      "destination": "hooks/h-mode-statusline.ps1",
+      "disposition": "adapted-or-retained",
+      "mode": "100644"
+    },
+    {
+      "source": "hooks/chisle-statusline.sh",
+      "source_blob_sha": "8c9f52c69622a2da2fb336f0cc16636b72470fc1",
+      "destination": "hooks/h-mode-statusline.sh",
+      "disposition": "adapted-or-retained",
+      "mode": "100755"
+    },
+    {
+      "source": "hooks/package.json",
+      "source_blob_sha": "b731bd61b9cefea28f38a00e57c8cb9a3866bd84",
+      "destination": "hooks/package.json",
+      "disposition": "adapted-or-retained",
+      "mode": "100644"
+    },
+    {
+      "source": "INSTALL.md",
+      "source_blob_sha": "ddf214a897d1b505a94026bb244f1579bb72a42c",
+      "destination": "INSTALL.md",
+      "disposition": "adapted-or-retained",
+      "mode": "100644"
+    },
+    {
+      "source": "install.ps1",
+      "source_blob_sha": "5c435afad01175f2072725976be4a6bb7e0b2921",
+      "destination": "install.ps1",
+      "disposition": "adapted-or-retained",
+      "mode": "100644"
+    },
+    {
+      "source": "install.sh",
+      "source_blob_sha": "ffc72543968ca00057ac032ca940dc9b7e035d63",
+      "destination": "install.sh",
+      "disposition": "adapted-or-retained",
+      "mode": "100755"
+    },
+    {
+      "source": "LICENSE",
+      "source_blob_sha": "e4ae89d9ef8da5b12b92db17e2279e4172616ad0",
+      "destination": "LICENSE",
+      "disposition": "adapted-or-retained",
+      "mode": "100644"
+    },
+    {
+      "source": "package.json",
+      "source_blob_sha": "9613b746c9776dd4a5e085d3ef9ef300ceef879f",
+      "destination": "package.json",
+      "disposition": "adapted-or-retained",
+      "mode": "100644"
+    },
+    {
+      "source": "README.md",
+      "source_blob_sha": "e085a9925a08ff06d8eba6e1be170531d7611860",
+      "destination": "docs/upstream-readme.md",
+      "disposition": "adapted-or-retained",
+      "mode": "100644"
+    },
+    {
+      "source": "rules/chisle-activate.md",
+      "source_blob_sha": "6e37df3154dbdb18a035c75eab8bfe35f4d22eca",
+      "destination": "rules/h-mode-activate.md",
+      "disposition": "adapted-or-retained",
+      "mode": "100644"
+    },
+    {
+      "source": "scripts/build-chart.js",
+      "source_blob_sha": "2a0e88d8b3f44fb3e79a910a974748ba191e8705",
+      "destination": "scripts/build-chart.js",
+      "disposition": "adapted-or-retained",
+      "mode": "100644"
+    },
+    {
+      "source": "scripts/build-rules.js",
+      "source_blob_sha": "6cc7fcad83aa8a5be12777c0ac8ac5e24457074e",
+      "destination": "scripts/build-rules.js",
+      "disposition": "adapted-or-retained",
+      "mode": "100644"
+    },
+    {
+      "source": "scripts/build-samples.js",
+      "source_blob_sha": "900f561ef6c8854fb7e42122aac6f33e6b4838e2",
+      "destination": "scripts/build-samples.js",
+      "disposition": "adapted-or-retained",
+      "mode": "100644"
+    },
+    {
+      "source": "SECURITY.md",
+      "source_blob_sha": "834e92c01bdc1d39c62a5d15ef42727af0f2af1b",
+      "destination": "SECURITY.md",
+      "disposition": "adapted-or-retained",
+      "mode": "100644"
+    },
+    {
+      "source": "site/.gitignore",
+      "source_blob_sha": "ff493eb62b1bba4629441e34d60e3a9a72d28930",
+      "destination": "site/.gitignore",
+      "disposition": "adapted-or-retained",
+      "mode": "100644"
+    },
+    {
+      "source": "site/next.config.ts",
+      "source_blob_sha": "cb651cdc007c4c5087ea7b4e61981bb2733f7d92",
+      "destination": "site/next.config.ts",
+      "disposition": "adapted-or-retained",
+      "mode": "100644"
+    },
+    {
+      "source": "site/package-lock.json",
+      "source_blob_sha": "b1f385f8227c65df0723f64c54e254ab27ea8401",
+      "destination": "site/package-lock.json",
+      "disposition": "adapted-or-retained",
+      "mode": "100644"
+    },
+    {
+      "source": "site/package.json",
+      "source_blob_sha": "08070380e5c4db4fc88b3cd91af0d205b67aaa95",
+      "destination": "site/package.json",
+      "disposition": "adapted-or-retained",
+      "mode": "100644"
+    },
+    {
+      "source": "site/postcss.config.mjs",
+      "source_blob_sha": "c7bcb4b1ee14cd5e25078c2c934529afdd2a7df9",
+      "destination": "site/postcss.config.mjs",
+      "disposition": "adapted-or-retained",
+      "mode": "100644"
+    },
+    {
+      "source": "site/public/llms.txt",
+      "source_blob_sha": "3c627132ef8041d0b346fc2e638272721207ec11",
+      "destination": "site/public/llms.txt",
+      "disposition": "adapted-or-retained",
+      "mode": "100644"
+    },
+    {
+      "source": "site/README.md",
+      "source_blob_sha": "50e18f32be780e6353cd0932d01ec389bc8ece8d",
+      "destination": "site/README.md",
+      "disposition": "adapted-or-retained",
+      "mode": "100644"
+    },
+    {
+      "source": "site/src/app/apple-icon.png",
+      "source_blob_sha": "1374dbe68a9d6769cf42a790a5b786c8f3db035e",
+      "destination": "docs/upstream-assets/site/src/app/apple-icon.png",
+      "disposition": "historical-preserved",
+      "mode": "100644"
+    },
+    {
+      "source": "site/src/app/globals.css",
+      "source_blob_sha": "93ff55e7036b733c5f8e2567fd62cc8ff91ae792",
+      "destination": "site/src/app/globals.css",
+      "disposition": "adapted-or-retained",
+      "mode": "100644"
+    },
+    {
+      "source": "site/src/app/icon.png",
+      "source_blob_sha": "b5fd40c05a4f16f849c71f09f9baee5fda6c4df5",
+      "destination": "docs/upstream-assets/site/src/app/icon.png",
+      "disposition": "historical-preserved",
+      "mode": "100644"
+    },
+    {
+      "source": "site/src/app/layout.tsx",
+      "source_blob_sha": "54c8b5390dcae7f58cd3ca2613a9f5963f754a42",
+      "destination": "site/src/app/layout.tsx",
+      "disposition": "adapted-or-retained",
+      "mode": "100644"
+    },
+    {
+      "source": "site/src/app/opengraph-image.tsx",
+      "source_blob_sha": "70d25c2380666523e5b456e48b0c1c123cdb874d",
+      "destination": "site/src/app/opengraph-image.tsx",
+      "disposition": "adapted-or-retained",
+      "mode": "100644"
+    },
+    {
+      "source": "site/src/app/page.tsx",
+      "source_blob_sha": "685b9f15329b8e8278264cbf817855e42d66d3b5",
+      "destination": "site/src/app/page.tsx",
+      "disposition": "adapted-or-retained",
+      "mode": "100644"
+    },
+    {
+      "source": "site/src/app/robots.ts",
+      "source_blob_sha": "f17802986fac20728d7a5a8e7d499e66d03f843c",
+      "destination": "site/src/app/robots.ts",
+      "disposition": "adapted-or-retained",
+      "mode": "100644"
+    },
+    {
+      "source": "site/src/app/sitemap.ts",
+      "source_blob_sha": "f87af7c5fd469551b7d3014a28212c31e8902410",
+      "destination": "site/src/app/sitemap.ts",
+      "disposition": "adapted-or-retained",
+      "mode": "100644"
+    },
+    {
+      "source": "site/src/components/Axes.tsx",
+      "source_blob_sha": "014af75e30e0d3e5d26f8f168c85c9de019a2a9c",
+      "destination": "site/src/components/Axes.tsx",
+      "disposition": "adapted-or-retained",
+      "mode": "100644"
+    },
+    {
+      "source": "site/src/components/Benchmarks.tsx",
+      "source_blob_sha": "d444dd3bfa1a6bb025f426d438524e488f7ded6e",
+      "destination": "site/src/components/Benchmarks.tsx",
+      "disposition": "adapted-or-retained",
+      "mode": "100644"
+    },
+    {
+      "source": "site/src/components/Community.tsx",
+      "source_blob_sha": "f1414c16cbd358d8de3a55b2bfe703e58da82042",
+      "destination": "site/src/components/Community.tsx",
+      "disposition": "adapted-or-retained",
+      "mode": "100644"
+    },
+    {
+      "source": "site/src/components/Compare.tsx",
+      "source_blob_sha": "50fd731ceb5d468323f59d9ea96c800bf552849c",
+      "destination": "site/src/components/Compare.tsx",
+      "disposition": "adapted-or-retained",
+      "mode": "100644"
+    },
+    {
+      "source": "site/src/components/Faq.tsx",
+      "source_blob_sha": "739968a9c2fe0238f435250c245a2c48475c8ee9",
+      "destination": "site/src/components/Faq.tsx",
+      "disposition": "adapted-or-retained",
+      "mode": "100644"
+    },
+    {
+      "source": "site/src/components/Footer.tsx",
+      "source_blob_sha": "565ef23e855cf7423ed77c1788cfcf055d8cf1c4",
+      "destination": "site/src/components/Footer.tsx",
+      "disposition": "adapted-or-retained",
+      "mode": "100644"
+    },
+    {
+      "source": "site/src/components/Hero.tsx",
+      "source_blob_sha": "a63b15564d7f4b5fe2d83846554a10cc0804b1c6",
+      "destination": "site/src/components/Hero.tsx",
+      "disposition": "adapted-or-retained",
+      "mode": "100644"
+    },
+    {
+      "source": "site/src/components/Ladder.tsx",
+      "source_blob_sha": "4ca18d1b99575f7443c4543c38c0bc948b90274c",
+      "destination": "site/src/components/Ladder.tsx",
+      "disposition": "adapted-or-retained",
+      "mode": "100644"
+    },
+    {
+      "source": "site/src/components/Markdown.tsx",
+      "source_blob_sha": "30fff347c21a96a07fc97b050f9b1f38029743b6",
+      "destination": "site/src/components/Markdown.tsx",
+      "disposition": "adapted-or-retained",
+      "mode": "100644"
+    },
+    {
+      "source": "site/src/components/Nav.tsx",
+      "source_blob_sha": "dfed14b889e134c018fee3fb6b49424b181e58c2",
+      "destination": "site/src/components/Nav.tsx",
+      "disposition": "adapted-or-retained",
+      "mode": "100644"
+    },
+    {
+      "source": "site/src/components/NavLinks.tsx",
+      "source_blob_sha": "39d5fb7075976d8733ff362694e6cfa9c2e1c37b",
+      "destination": "site/src/components/NavLinks.tsx",
+      "disposition": "adapted-or-retained",
+      "mode": "100644"
+    },
+    {
+      "source": "site/src/components/Pipeline.tsx",
+      "source_blob_sha": "78c873052ed368768c311074822133df29132662",
+      "destination": "site/src/components/Pipeline.tsx",
+      "disposition": "adapted-or-retained",
+      "mode": "100644"
+    },
+    {
+      "source": "site/src/components/Reveal.tsx",
+      "source_blob_sha": "29f12c4f7c8a457e927993ed28ce86f2a6475aaf",
+      "destination": "site/src/components/Reveal.tsx",
+      "disposition": "adapted-or-retained",
+      "mode": "100644"
+    },
+    {
+      "source": "site/src/components/Stats.tsx",
+      "source_blob_sha": "a4fa7aa8945511243f42311437122f02ab327a7a",
+      "destination": "site/src/components/Stats.tsx",
+      "disposition": "adapted-or-retained",
+      "mode": "100644"
+    },
+    {
+      "source": "site/src/components/Terminal.tsx",
+      "source_blob_sha": "cdea41508d25be5711615c85c6db5114279dffa6",
+      "destination": "site/src/components/Terminal.tsx",
+      "disposition": "adapted-or-retained",
+      "mode": "100644"
+    },
+    {
+      "source": "site/src/components/ThemeToggle.tsx",
+      "source_blob_sha": "d21b6a9072baa19186009ded9c2d19ee9dea95aa",
+      "destination": "site/src/components/ThemeToggle.tsx",
+      "disposition": "adapted-or-retained",
+      "mode": "100644"
+    },
+    {
+      "source": "site/src/data/samples.json",
+      "source_blob_sha": "6a971dc08dce807f009c32a580a2dbccf07af666",
+      "destination": "site/src/data/samples.json",
+      "disposition": "historical-preserved",
+      "mode": "100644"
+    },
+    {
+      "source": "site/src/lib/github.ts",
+      "source_blob_sha": "a15d7488ea9c07a495a7c424732a1b81e6b0edf3",
+      "destination": "site/src/lib/github.ts",
+      "disposition": "adapted-or-retained",
+      "mode": "100644"
+    },
+    {
+      "source": "site/tsconfig.json",
+      "source_blob_sha": "7bbb10fdf08b79cc3bc0f1d6e981bcee004acdaa",
+      "destination": "site/tsconfig.json",
+      "disposition": "adapted-or-retained",
+      "mode": "100644"
+    },
+    {
+      "source": "skills/chisle-audit/SKILL.md",
+      "source_blob_sha": "e9368b9d67b6f271d628422f9ebc7502121e4a2c",
+      "destination": "skills/h-mode-audit/SKILL.md",
+      "disposition": "adapted-or-retained",
+      "mode": "100644"
+    },
+    {
+      "source": "skills/chisle-help/SKILL.md",
+      "source_blob_sha": "2037a528a5c6dec7ed9900fd76b93b1b415ea604",
+      "destination": "skills/h-mode-help/SKILL.md",
+      "disposition": "adapted-or-retained",
+      "mode": "100644"
+    },
+    {
+      "source": "skills/chisle-review/SKILL.md",
+      "source_blob_sha": "532f78cbce9af99d2fcb405cac3747b76f0b0c98",
+      "destination": "skills/h-mode-review/SKILL.md",
+      "disposition": "adapted-or-retained",
+      "mode": "100644"
+    },
+    {
+      "source": "skills/chisle/SKILL.md",
+      "source_blob_sha": "5e9117ac9721aa82304c09019ab40a493a375669",
+      "destination": "skills/h-mode/SKILL.md",
+      "disposition": "adapted-or-retained",
+      "mode": "100644"
+    },
+    {
+      "source": "SUPPORT.md",
+      "source_blob_sha": "b6a80a89e27d8a9dd6c3ea75fd0d064690e318db",
+      "destination": "SUPPORT.md",
+      "disposition": "adapted-or-retained",
+      "mode": "100644"
+    },
+    {
+      "source": "tests/test_compress.js",
+      "source_blob_sha": "23773316ae15e6f3ede31b486fc1c6532cf638a3",
+      "destination": "tests/test_compress.js",
+      "disposition": "adapted-or-retained",
+      "mode": "100644"
+    },
+    {
+      "source": "tests/test_hooks.js",
+      "source_blob_sha": "5ba62be27d5177ae85a4800c9dd530c2de0eae32",
+      "destination": "tests/test_hooks.js",
+      "disposition": "adapted-or-retained",
+      "mode": "100644"
+    },
+    {
+      "source": "tests/test_installer.js",
+      "source_blob_sha": "0c7a34446e4f117839df639f7e4ee86789ba7701",
+      "destination": "tests/test_installer.js",
+      "disposition": "adapted-or-retained",
+      "mode": "100644"
+    },
+    {
+      "source": "tests/test_settings.js",
+      "source_blob_sha": "b9e85ac304ef4f5d09c8831f732daaa6719610af",
+      "destination": "tests/test_settings.js",
+      "disposition": "adapted-or-retained",
+      "mode": "100644"
+    },
+    {
+      "source": "tests/test_tracker.js",
+      "source_blob_sha": "4a69d8fb0526372ebe117f0c1c15f90a867fc1b8",
+      "destination": "tests/test_tracker.js",
+      "disposition": "adapted-or-retained",
+      "mode": "100644"
+    },
+    {
+      "source": "TODO.md",
+      "source_blob_sha": "59d163058af7e1b792fcf0b531fa86696e1a1bc4",
+      "destination": "TODO.md",
+      "disposition": "adapted-or-retained",
+      "mode": "100644"
+    }
+  ]
+}

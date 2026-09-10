@@ -1,0 +1,76 @@
+#!/usr/bin/env node
+// Integration tests for h-mode-mode-tracker.js — drives it via stdin with a temp
+// CLAUDE_CONFIG_DIR and asserts the resulting flag state.
+// Run: node --test tests/test_tracker.js
+
+const { test } = require('node:test');
+const assert = require('node:assert/strict');
+const fs = require('fs');
+const os = require('os');
+const path = require('path');
+const { execFileSync } = require('child_process');
+
+const TRACKER = path.join(__dirname, '..', 'hooks', 'h-mode-mode-tracker.js');
+
+// Run the tracker with a given prompt against a fresh temp config dir.
+// Returns the flag contents after the run (or null if the flag was removed).
+function runTracker(prompt, { preActive } = {}) {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'h-mode-trk-'));
+  const flagPath = path.join(dir, '.h-mode-active');
+  if (preActive) fs.writeFileSync(flagPath, preActive, { mode: 0o600 });
+
+  try {
+    execFileSync(process.execPath, [TRACKER], {
+      input: JSON.stringify({ prompt }),
+      env: { ...process.env, CLAUDE_CONFIG_DIR: dir, H_MODE_DEFAULT_MODE: 'on' },
+      encoding: 'utf8',
+      timeout: 5000,
+    });
+  } catch (e) { /* tracker silent-fails; we assert on flag state */ }
+
+  let flag = null;
+  try { flag = fs.readFileSync(flagPath, 'utf8').trim(); } catch (e) {}
+  fs.rmSync(dir, { recursive: true, force: true });
+  return flag;
+}
+
+// ── Activation ───────────────────────────────────────────────────────────────
+
+test('/h-mode activates at default level', () => {
+  assert.equal(runTracker('/h-mode'), 'on');
+});
+
+test('a leftover level argument still just activates', () => {
+  // /h-mode lite|full|ultra used to select an intensity. One mode now, so any
+  // stray argument is ignored rather than rejected — old muscle memory works.
+  assert.equal(runTracker('/h-mode full'), 'on');
+  assert.equal(runTracker('/h-mode ultra'), 'on');
+});
+
+test('natural language "activate h-mode" activates', () => {
+  assert.equal(runTracker('please activate h-mode'), 'on');
+});
+
+// ── Deactivation ─────────────────────────────────────────────────────────────
+
+test('"stop h-mode" deactivates', () => {
+  assert.equal(runTracker('stop h-mode', { preActive: 'on' }), null);
+});
+
+test('"/h-mode off" deactivates', () => {
+  assert.equal(runTracker('/h-mode off', { preActive: 'on' }), null);
+});
+
+test('"normal mode" deactivates', () => {
+  assert.equal(runTracker('normal mode', { preActive: 'on' }), null);
+});
+
+// ── Regression: must NOT deactivate on unrelated "off"/"stop" ─────────────────
+
+test('REGRESSION: "use h-mode to turn off the logger" stays active', () => {
+  assert.equal(runTracker('use h-mode to turn off the logger', { preActive: 'on' }), 'on');
+});
+
+test('REGRESSION: "h-mode please stop the server" stays active', () => {
+  assert.equal(runTracker('h-mode please stop the server', { preActive: 'on' }), 'on');
+});

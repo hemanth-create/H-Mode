@@ -1,0 +1,2 @@
+description = "Read-only review of a diff or file for over-engineering."
+prompt = "Apply the installed h-mode-review skill to {{args}}. With no target, review the current diff. Inspect relevant callers and contracts. Report actionable simplifications with paths and lines while preserving behavior, security, and explicit requirements. Do not edit files or publish review comments."

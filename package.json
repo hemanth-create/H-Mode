@@ -1,9 +1,77 @@
 {
   "name": "h-mode",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "private": true,
-  "description": "Hemanth's concise, reuse-first coding skill with an optional local log preview helper.",
+  "description": "Maximum-efficiency dev mode for Claude Code. Zero-fluff prose + YAGNI-first code decisions. One plugin that does both.",
+  "keywords": [
+    "claude-code",
+    "claude-code-plugin",
+    "productivity",
+    "yagni",
+    "minimal"
+  ],
   "license": "MIT",
-  "engines": { "node": ">=18" },
-  "scripts": { "test": "node --test tests/*.test.cjs" }
+  "author": {
+    "name": "Hemanth",
+    "url": "https://github.com/hemanth-create"
+  },
+  "contributors": [
+    {
+      "name": "Claude (Anthropic)",
+      "url": "https://claude.com/claude-code"
+    },
+    {
+      "name": "Codex (OpenAI)",
+      "url": "https://openai.com/codex/"
+    }
+  ],
+  "homepage": "https://github.com/hemanth-create/H-Mode",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hemanth-create/H-Mode.git"
+  },
+  "bugs": {
+    "url": "https://github.com/hemanth-create/H-Mode/issues"
+  },
+  "bin": {
+    "h-mode": "bin/install.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "test": "node --test tests/*.js tests/*.test.cjs",
+    "build:rules": "node scripts/build-rules.js",
+    "check:rules": "node scripts/build-rules.js --check",
+    "build:chart": "node scripts/build-chart.js",
+    "check:chart": "node scripts/build-chart.js --check",
+    "bench": "bash benchmarks/run-live.sh",
+    "build:samples": "node scripts/build-samples.js",
+    "check:samples": "node scripts/build-samples.js --check"
+  },
+  "files": [
+    "bin/",
+    "hooks/",
+    "skills/",
+    "commands/",
+    "rules/",
+    "AGENTS.md",
+    ".cursor/",
+    ".windsurf/",
+    ".clinerules/",
+    ".kiro/",
+    ".github/copilot-instructions.md",
+    ".claude-plugin/",
+    ".codex-plugin/",
+    ".github/plugin/",
+    "gemini-extension.json",
+    "GEMINI.md",
+    "NOTICE.md",
+    "README.md",
+    "LICENSE"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  }
 }

@@ -1,0 +1,4 @@
+interface:
+  display_name: "H-Mode Help"
+  short_description: "Explain H-Mode commands, setup, and platform limits"
+  default_prompt: "Use $h-mode-help for this task."

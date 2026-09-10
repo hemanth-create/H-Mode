@@ -1,0 +1,4 @@
+interface:
+  display_name: "H-Mode Audit"
+  short_description: "Audit code and prose for unnecessary complexity"
+  default_prompt: "Use $h-mode-audit for this task."

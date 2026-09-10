@@ -1,0 +1,35 @@
+# H-Mode
+
+Hemanth's full coding-efficiency suite includes four skills: h-mode,
+h-mode-audit, h-mode-review, and h-mode-help. Audit and review are read-only.
+Integrations include Claude Code and Codex plugin manifests, a Gemini extension
+with four commands, and Cursor, Windsurf, Cline, Kiro, and Copilot rule files.
+
+Claude Code hooks provide session activation, mode tracking, and optional
+tool-output compression. Compression is lossy, uses an allowlist, and excludes
+Read/Edit/Write by default. Support for replacing tool output depends on the
+host's response schema. No fresh H-Mode token reduction is claimed.
+
+All committed numerical benchmarks and sample comparisons are historical
+upstream results, not H-Mode measurements or guarantees. Their raw files and
+provenance are retained unchanged. Live benchmarks are opt-in paid operations;
+the replay utility analyzes local transcripts without model calls.
+
+Install from GitHub: npx github:hemanth-create/H-Mode --dry-run
+Claude plugin: claude plugin marketplace add hemanth-create/H-Mode
+Then: claude plugin install h-mode@h-mode
+Codex skills: npx github:hemanth-create/H-Mode --only codex
+No npm package publication is claimed. The installer requires Node >= 18.
+
+The compressor makes no network/model calls. The session-start update notice
+can query GitHub releases; H_MODE_UPDATE_CHECK=0 disables it.
+H_MODE_COMPRESS=0 disables compression. /h-mode off disables the Claude mode.
+
+## Links
+
+- [Repository](https://github.com/hemanth-create/H-Mode)
+- [Installation](https://github.com/hemanth-create/H-Mode/blob/main/INSTALL.md)
+- [Four skills](https://github.com/hemanth-create/H-Mode/tree/main/skills)
+- [Historical benchmarks](https://github.com/hemanth-create/H-Mode/tree/main/benchmarks)
+- [Provenance and MIT attribution](https://github.com/hemanth-create/H-Mode/blob/main/NOTICE.md)
+- [Full-suite parity](https://github.com/hemanth-create/H-Mode/blob/main/docs/upstream-parity.md)

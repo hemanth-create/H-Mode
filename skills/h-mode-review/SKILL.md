@@ -1,0 +1,54 @@
+---
+name: h-mode-review
+description: >
+  Review a diff or file through the H-Mode lens: flag over-engineering,
+  speculative abstractions, reinvented stdlib, and verbose code that a lazier
+  approach would shrink. One finding per line, no praise. Use when the user says
+  "h-mode review", "review this for bloat", or invokes /h-mode-review.
+---
+
+# H-Mode review
+
+Review the diff/file for **what could be deleted or simplified**, not for style nits.
+
+Read-only: do not edit files, activate a mode, post review comments, or apply fixes.
+Inspect affected callers and requirements before proposing a simplification.
+With no explicit target, inspect staged and unstaged changes; if neither exists,
+report that there is no current diff rather than silently widening the review.
+One implementation alone is not proof an abstraction is unnecessary.
+
+## What to flag
+
+- Abstraction with one implementation (interface/factory/wrapper for a single case)
+- Reinvented stdlib (hand-rolled debounce, deep-clone, groupBy, date math)
+- New dependency for what a few lines or an installed dep already does
+- Config/option that never varies
+- Speculative "for later" scaffolding with no current caller
+- Verbose code where a native platform feature (CSS, DB constraint, `<input type>`) does it
+
+## What NOT to flag
+
+- Input validation at trust boundaries
+- Error handling that prevents data loss
+- Security / accessibility code
+- Anything the task explicitly required
+
+## Output format
+
+One finding per line. No preamble, no praise.
+
+```
+path:line: <what's over-built>. <the lazier replacement>.
+```
+
+Example:
+
+```
+cache.js:12: ApiCacheManager class for one call site. Replace with lru_cache / a Map.
+search.js:40: hand-rolled debounce util. setTimeout+clearTimeout inline is enough.
+```
+
+End with a one-line verdict: `N findings. Est. <X> lines removable.`
+
+Mark line counts as estimates and uncertain findings as unverified. Preserve
+required behavior, tests, public contracts, and domain-specific rationale.

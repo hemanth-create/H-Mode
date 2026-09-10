@@ -1,0 +1,2 @@
+description = "Activate concise H-Mode coding or turn it off."
+prompt = "Apply the installed h-mode skill to this request. If the argument is off, stop, or disable, stop applying H-Mode. Otherwise use concise prose, reuse-first code, and focused context without dropping requirements. Request: {{args}}"

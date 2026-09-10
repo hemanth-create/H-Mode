@@ -10,7 +10,7 @@ const skillDir = path.join(root, 'skills/h-mode');
 test('skill entrypoint and UI metadata identify the same usable skill', () => {
   const skill = fs.readFileSync(path.join(skillDir, 'SKILL.md'), 'utf8');
   const ui = fs.readFileSync(path.join(skillDir, 'agents/openai.yaml'), 'utf8');
-  assert.match(skill, /^---\nname: h-mode\ndescription: >-/);
+  assert.match(skill, /^---\nname: h-mode\ndescription: >-?/);
   assert.match(ui, /default_prompt: ".*\$h-mode/);
   assert.ok(!skill.includes('[TODO:'));
 });

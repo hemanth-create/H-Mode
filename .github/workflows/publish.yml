@@ -1,0 +1,75 @@
+name: publish
+
+# Optional npm publishing using Trusted Publishing (OIDC).
+# Disabled until the owner configures publishing and sets the repository gate.
+#
+# Release flow:
+#   1. bump "version" in package.json
+#   2. git tag vX.Y.Z && git push --tags
+#   3. this workflow publishes + releases
+
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+
+permissions:
+  id-token: write   # OIDC for npm trusted publishing
+  contents: write   # create the GitHub Release
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with: { node-version: '22' }
+      - run: node --test tests/*.js tests/*.test.cjs
+      - run: node scripts/build-rules.js --check
+      - run: node scripts/build-chart.js --check
+      - run: node scripts/build-samples.js --check
+
+  publish:
+    if: ${{ vars.H_MODE_ENABLE_NPM_PUBLISH == 'true' }}
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+          registry-url: 'https://registry.npmjs.org'
+      # Trusted publishing (OIDC) needs npm >= 11.5.1; Node 22 ships npm 10.
+      - run: npm install -g npm@latest
+      - name: Verify tag matches package.json version
+        run: |
+          TAG="${GITHUB_REF_NAME#v}"
+          PKG="$(node -p "require('./package.json').version")"
+          if [ "$TAG" != "$PKG" ]; then
+            echo "tag v$TAG != package.json $PKG"; exit 1
+          fi
+      # No token: id-token:write + publishConfig.access=public lets npm
+      # authenticate via OIDC and attach provenance automatically.
+      # Idempotent: a re-pushed tag (e.g. after a history rewrite) must not
+      # fail the run when the version is already on the registry.
+      - name: Publish (skip if version already on npm)
+        run: |
+          PKG="$(node -p "require('./package.json').version")"
+          PKG_NAME="$(node -p "require('./package.json').name")"
+          if [ "$(npm view "$PKG_NAME@$PKG" version 2>/dev/null)" = "$PKG" ]; then
+            echo "$PKG_NAME@$PKG already published — skipping"
+          else
+            npm publish
+          fi
+
+  release:
+    if: ${{ vars.H_MODE_ENABLE_NPM_PUBLISH == 'true' }}
+    needs: publish
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          generate_release_notes: true
+          body_path: ${{ github.workspace }}/CHANGELOG.md

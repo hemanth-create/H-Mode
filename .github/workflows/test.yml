@@ -1,0 +1,32 @@
+name: test
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [18, 20, 22]
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: ${{ matrix.node }}
+      - name: Run tests
+        run: node --test tests/*.js tests/*.test.cjs
+        env:
+          H_MODE_UPDATE_CHECK: '0'
+      - name: Verify rule copies are in sync
+        run: node scripts/build-rules.js --check
+      - name: Verify benchmark chart is in sync
+        run: node scripts/build-chart.js --check
+      - name: Verify sample data is in sync
+        run: node scripts/build-samples.js --check
+      - name: Lint shell scripts
+        run: bash -n hooks/h-mode-statusline.sh && bash -n install.sh
+      - name: Installer smoke test
+        run: node bin/install.js --list && node bin/install.js --help

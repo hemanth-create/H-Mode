@@ -1,77 +1,129 @@
 # H-Mode
 
-Hemanth's coding skill for clear answers, small correct changes, and focused verification.
+Hemanth's full coding-efficiency plugin and skill suite: concise output,
+reuse-first code, focused context, plus read-only audit and review workflows.
 
-## What it does
+## Included
 
-- Cuts filler without hiding reasoning, uncertainty, or important caveats.
-- Prefers existing code, standard libraries, native features, and installed dependencies.
-- Avoids speculative abstractions and unrelated changes.
-- Gathers targeted context instead of loading every file and log.
-- Verifies behavior with meaningful checks and reports what actually ran.
-- Includes an optional, local-only plain-text log preview helper.
+| Component | Location |
+|---|---|
+| Main coding mode | `skills/h-mode/` |
+| Code + prose efficiency audit | `skills/h-mode-audit/` |
+| Over-engineering review | `skills/h-mode-review/` |
+| Command and setup help | `skills/h-mode-help/` |
+| Claude Code plugin + marketplace | `.claude-plugin/` |
+| Codex plugin exposing all four skills | `.codex-plugin/plugin.json` |
+| Gemini extension + executable commands | `gemini-extension.json`, `commands/` |
+| Session activation, prompt tracking, output compression | `hooks/` |
+| Bash and PowerShell statuslines | `hooks/h-mode-statusline.sh`, `.ps1` |
+| Cross-platform installer and settings merge | `bin/`, `install.sh`, `install.ps1` |
+| Cursor, Windsurf, Cline, Kiro, Copilot rules | Per-agent directories |
+| Benchmarks, replay, charts, sample builders | `benchmarks/`, `scripts/` |
+| Tests, CI, release tooling, website source | `tests/`, `.github/workflows/`, `site/` |
 
-The skill is [skills/h-mode/SKILL.md](skills/h-mode/SKILL.md). Its instructions are
-the source of truth; helper details are loaded only when needed.
+This replaces the earlier reduced H-Mode adaptation with the full upstream
+feature set, rebranded and with documented integration fixes. It is not a
+byte-for-byte copy. See [the parity notes](docs/upstream-parity.md).
 
-## Use it
+## Install
 
-Install or import the **entire `skills/h-mode` folder** using your agent's skill
-installation mechanism. Keep its `LICENSE`, `agents`, `references`, and `scripts`
-with it. Then select H-Mode or ask:
-
-> Use H-Mode for this task. Find the cause, make the smallest correct change,
-> and verify the affected behavior. Keep the explanation concise.
-
-Hosts that support dollar-style skill invocation can use `$h-mode`.
-For an agent that only accepts project instructions or steering, use the body of
-`SKILL.md` as project guidance; adjust its relative helper link to the installed
-location, or omit that optional helper paragraph. Keep the license alongside it.
-
-H-Mode is task-scoped by default. Ask to keep it active if wanted, or say
-`H-Mode off` / `normal mode`. Actual availability and persistence depend on the
-host agent; these files do not change model settings or enforce a runtime mode.
-
-This repository does **not** install anything into your computer or ChatGPT
-account just because it exists on GitHub. No global agent files are overwritten.
-
-## Optional log previews
-
-With Node.js 18+ installed, run from the repository root:
+Preview the installer before allowing it to modify agent configuration:
 
 ```sh
-node skills/h-mode/scripts/compact-output.cjs /path/to/build.log
-node skills/h-mode/scripts/compact-output.cjs --elide /path/to/build.log
+npx github:hemanth-create/H-Mode --dry-run
+npx github:hemanth-create/H-Mode --only claude
 ```
 
-The default cleans formatting and repeated lines. `--elide` explicitly allows
-dropping the middle of large logs while attempting to keep error-like lines.
-The original file is unchanged. Read the [limitations and safety guidance](skills/h-mode/references/tool-output.md)
-before using it for diagnosis. Formatting cleanup is not byte-for-byte lossless.
+Or use Claude Code's marketplace:
 
-## Intentionally not included
+```sh
+claude plugin marketplace add hemanth-create/H-Mode
+claude plugin install h-mode@h-mode
+```
 
-No original-product branding in the skill or helper, marketing, benchmark claims,
-background update checks, telemetry, global mode flags, statusline badges,
-cross-session deduplication, or automatic multi-agent installer.
+For Codex's portable skill installation:
 
-The instruction-only skill works independently of the helper. No automatic
-tool-output interception or Claude Code hooks are registered. No claimed
-percentage reduction in billed tokens: savings and quality depend on real tasks
-and the host's billing and context behavior.
+```sh
+npx github:hemanth-create/H-Mode --only codex
+```
 
-## Development
+This installs all four skill folders and the always-on rules, respecting
+`CODEX_HOME` when set. The repository also supplies the native Codex plugin
+manifest for hosts that import plugin repositories. No Claude hooks are
+advertised as Codex runtime hooks.
 
-No npm dependencies or installation step are needed:
+The npm name `h-mode` is **not** claimed as published. The commands above install
+from this GitHub repository. See [INSTALL.md](INSTALL.md) for local-clone setup,
+Windows statuslines, editor integrations, configuration, and uninstall behavior.
+
+## Commands
+
+| Skill | Purpose |
+|---|---|
+| `h-mode` | Concise coding and reuse-first implementation |
+| `h-mode-audit [path]` | Read-only audit of code and prose for avoidable complexity |
+| `h-mode-review [path]` | Read-only review of a diff or file for over-engineering |
+| `h-mode-help` | Usage and platform differences |
+
+Use `$h-mode-audit` / `$h-mode-review` in Codex. Claude Code may show
+plugin-qualified slash names such as `/h-mode:h-mode-audit`; standalone skill
+installs and Gemini use names such as `/h-mode-audit`. Use the host's command
+picker for the exact displayed name. Audit and review do not apply fixes or
+publish comments. `stop h-mode`, `/h-mode off`, or `normal mode` turns the main
+mode off in Claude Code; plugin-qualified `/h-mode:h-mode off` is also recognized.
+
+## Hooks and limits
+
+Claude Code integration includes `SessionStart`, `UserPromptSubmit`, and
+`PostToolUse` hooks. It retains the upstream formatting cleanup, head/tail
+elision, bounded error sampling, and same-session duplicate detection.
+
+The compressor does not edit source files. Its elision is lossy and can remove
+useful diagnostic details. Exact `Read` / `Edit` / `Write` tools are excluded by
+default. MCP tool names alone do not imply read-only behavior; narrow the
+allowlist for your own environment. Replacement support depends on the host and
+tool-output schema: unit tests are not proof of end-to-end token reduction.
+
+Mode and statistics use files inside the Claude config directory. The mode flag
+is shared by sessions using that directory. The inherited dedup logic assumes
+earlier output is still available; disable it after compaction when that is not
+true. Statistics are character counts, with tokens estimated as characters / 4.
+
+```sh
+# Set these through your shell or environment settings as appropriate.
+H_MODE_DEFAULT_MODE=off
+H_MODE_COMPRESS=0
+H_MODE_COMPRESS_SCRUB=0
+H_MODE_COMPRESS_DEDUP=0
+H_MODE_UPDATE_CHECK=0
+```
+
+All original compression tuning options remain under the `H_MODE_` prefix.
+The session-start update notice checks this repository's GitHub releases, cached
+for three days; it sends no prompts or source code. The compressor itself makes
+no network or model calls. [Security and limitations](SECURITY.md).
+
+## Verification and benchmarks
 
 ```sh
 npm test
+node scripts/build-rules.js --check
+node scripts/build-chart.js --check
+node scripts/build-samples.js --check
 ```
 
-Tests exercise the log helper and the skill package's local links and metadata.
-They do not establish model quality or validate behavior inside every agent host.
+Historical raw results are retained unchanged under `benchmarks/results/` and
+identified as **upstream results, not H-Mode measurements**. The historical
+`rdxmin` data key is retained for reproducibility. The website's benchmark
+components and generated charts use upstream labels. Do not interpret these as
+fresh H-Mode quality or cost guarantees.
+
+The replay utility reads local transcripts without model calls. Live benchmarks
+are separate, paid operations that require explicit opt-in; they were not run
+as part of the repository migration. Website source is included, not deployed.
 
 ## License
 
-MIT. Required upstream attribution is retained in [NOTICE.md](NOTICE.md) and
-[LICENSE](LICENSE); operational names and instructions use H-Mode.
+MIT. Runtime names, commands, configuration, and install links use H-Mode.
+Required attribution and unchanged historical evidence retain their provenance
+in [NOTICE.md](NOTICE.md), [LICENSE](LICENSE), and the historical documents.

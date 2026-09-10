@@ -1,0 +1,2 @@
+description = "Explain H-Mode commands and platform differences."
+prompt = "Explain h-mode, h-mode-audit, h-mode-review, and h-mode-help using the installed h-mode-help skill. The audit and review commands are read-only. Explain that runtime hooks/statuslines are Claude-specific and installation depends on the host. Do not activate a persistent mode."

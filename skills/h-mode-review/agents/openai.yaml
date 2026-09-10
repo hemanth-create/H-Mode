@@ -1,0 +1,4 @@
+interface:
+  display_name: "H-Mode Review"
+  short_description: "Review code for avoidable complexity without edits"
+  default_prompt: "Use $h-mode-review for this task."

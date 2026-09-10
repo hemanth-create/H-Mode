@@ -1,0 +1,5 @@
+# Default owner for everything in this repo.
+* @hemanth-create
+
+# Security-sensitive paths — review with extra care.
+/hooks/h-mode-config.js @hemanth-create

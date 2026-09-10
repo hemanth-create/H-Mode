@@ -1,0 +1,2 @@
+description = "Read-only audit of code and prose for avoidable complexity."
+prompt = "Apply the installed h-mode-audit skill to {{args}}. If no target is provided inspect the current staged and unstaged diff, stating any fallback scope. Check callers and requirements. Report ranked, evidence-backed code and prose findings with paths and lines. Do not edit files, publish comments, or activate a persistent mode."
