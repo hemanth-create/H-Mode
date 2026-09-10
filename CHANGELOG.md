@@ -3,6 +3,8 @@
 ## [Unreleased]
 
 - Let explicit activation override an off default.
+- Accept punctuation on off commands and polite/scoped natural mode requests,
+  while preserving negation, explanation, and one-shot command guards.
 - Preserve on/off choices across resume, clear, and compaction; new startup
   still uses the configured default. Hide both statusline badges while off.
 - Refine all four skills to preserve scope, readability, contracts, and

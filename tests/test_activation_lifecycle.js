@@ -92,6 +92,20 @@ test('negated, help, and audit requests leave reminders and compression disabled
   }
 });
 
+test('off requests with punctuation or trailing courtesy disable all runtime effects', t => {
+  const s = session(t, 'on');
+  s.start('startup');
+  for (const prompt of ['/h-mode off.', '/h-mode:h-mode off.',
+    'Normal mode please.', 'h-mode off for this task']) {
+    s.prompt('/h-mode on');
+    assert.equal(s.prompt(prompt), '', prompt + ': no active reminder');
+    assert.equal(s.mode(), 'off', prompt + ': mode is off');
+    assert.equal(s.compress(), '', prompt + ': no compression');
+    assert.doesNotMatch(s.start('compact'), /H-MODE ACTIVE/, prompt + ': stays off after compaction');
+    assert.equal(s.mode(), 'off');
+  }
+});
+
 test('Bash statusline hides an explicit off flag and still displays an active badge', { skip: process.platform === 'win32' }, t => {
   const s = session(t, 'on');
   const badge = () => {

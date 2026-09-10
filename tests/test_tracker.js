@@ -104,6 +104,50 @@ test('direct deactivation commands still work with polite prefixes and mode alia
   }
 });
 
+test('slash off commands tolerate punctuation from either starting state', () => {
+  for (const command of ['/h-mode', '/h-mode:h-mode']) {
+    for (const arg of ['off', 'stop', 'disable', 'deactivate']) {
+      for (const suffix of ['', '.', '!', '?', ',', ':', ';']) {
+        for (const preActive of ['off', 'on']) {
+          const prompt = command + ' ' + arg + suffix;
+          assert.equal(runTracker(prompt, { preActive, defaultMode: 'off' }), 'off', prompt);
+        }
+      }
+    }
+  }
+});
+
+test('bare mode requests accept polite and scope suffixes without reversing intent', () => {
+  const cases = [
+    ['Normal mode', 'off'], ['h-mode off', 'off'], ['h-mode mode off', 'off'],
+    ['h-mode on', 'on'], ['h-mode mode', 'on'],
+  ];
+  for (const [command, expected] of cases) {
+    for (const suffix of [' please.', ', please!', ' for now', ' for this task',
+      ' please for this session.', ' for the current task, please.']) {
+      for (const preActive of ['off', 'on']) {
+        const prompt = command + suffix;
+        assert.equal(runTracker(prompt, { preActive, defaultMode: 'off' }), expected, prompt);
+      }
+    }
+  }
+});
+
+test('suffix handling does not reinterpret explanations, negations, or help as mode requests', () => {
+  for (const prompt of [
+    'Do not use h-mode for this task, please.', 'Do not disable h-mode for now.',
+    'How do I use h-mode for this task?', 'Explain normal mode, please.',
+    'H-mode off means what, please?', 'H-mode on or off for this task?',
+    'Normal mode is what I used for this task.', '"h-mode off for this task"',
+    'Can you use h-mode-help for this task?', 'Please use h-mode-review for now.',
+    'Use h-mode audit for this task, please.',
+  ]) {
+    for (const preActive of [null, 'off', 'on']) {
+      assert.equal(runTracker(prompt, { preActive, defaultMode: 'off' }), preActive, prompt);
+    }
+  }
+});
+
 // ── Regression: must NOT deactivate on unrelated "off"/"stop" ─────────────────
 
 test('REGRESSION: "use h-mode to turn off the logger" stays active', () => {

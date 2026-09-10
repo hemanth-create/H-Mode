@@ -24,23 +24,27 @@ process.stdin.on('end', () => {
     if (/^\/(?:h-mode:)?h-mode-(?:audit|review|help)(?=$|[\s.!?,;:])/.test(request) ||
         /^(?:(?:activate|enable|turn on|start|use)\s+)?h-mode[ -](?:audit|review|help)(?=$|[\s.!?,;:])/.test(request)) return;
 
+    // Bare selectors may carry courtesy or scope ("normal mode please",
+    // "h-mode off for this task"). Strip only these suffixes, not arbitrary
+    // trailing prose such as "h-mode off means what?". Apply this to on and off.
+    const selector = request.replace(/(?:,?\s+please)?(?:\s+for\s+(?:now|(?:this|that|my|our|the(?:\s+current)?|current)\s+(?:task|session|request|conversation|turn)))?(?:,?\s+please)?[.!?]*$/, '');
+
     // Slash commands retain legacy level arguments as activation aliases.
     if (/^\/(?:h-mode:)?h-mode(?:\s|$)/.test(promptLower)) {
       const parts = promptLower.split(/\s+/);
-      const arg = parts[1] || '';
-      if (arg === 'off' || arg === 'stop' || arg === 'disable') {
+      const arg = (parts[1] || '').replace(/[.!?,;:]+$/, '');
+      if (arg === 'off' || arg === 'stop' || arg === 'disable' || arg === 'deactivate') {
         safeWriteFlag(flagPath, 'off');
       } else {
         safeWriteFlag(flagPath, 'on');
       }
     } else if (/^(?:turn off|disable|deactivate|stop|kill|exit)\s+h-mode(?=$|[\s.!?,;:])/.test(request) ||
-        /^(?:h-mode\s+(?:mode\s+)?(?:off|stop|disable|deactivate)|normal mode)[.!?]?$/.test(request)) {
+        /^(?:h-mode\s+(?:mode\s+)?(?:off|stop|disable|deactivate)|normal mode)$/.test(selector)) {
       safeWriteFlag(flagPath, 'off');
     } else if (/^(?:(?:activate|enable|turn on|start|use)\s+h-mode|h-modify)(?=$|[\s.!?,;:])/.test(request) ||
-        /^h-mode\s+(?:mode(?:\s+on)?|activate|enable|on)[.!?]?$/.test(request)) {
+        /^h-mode\s+(?:mode(?:\s+on)?|activate|enable|on)$/.test(selector)) {
       // The target boundary excludes h-mode-audit/review/help. Off/stop words
       // later in the task (e.g. "use h-mode to turn off the logger") are unrelated.
-      // Bare mode selectors must stand alone, not introduce an explanation.
       safeWriteFlag(flagPath, 'on');
     }
 

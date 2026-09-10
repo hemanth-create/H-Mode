@@ -3,7 +3,7 @@
 ## Activation and skill refinements
 
 The follow-up change adds lifecycle, statusline, and instruction-propagation
-regressions. Local Linux/Node 24 validation: 117 tests, 116 passed, 1 skipped
+regressions. Local Linux/Node 24 validation: 125 tests, 124 passed, 1 skipped
 because PowerShell is unavailable. The PowerShell badge check runs when that
 shell is available, including CI runners that provide it.
 
@@ -13,9 +13,18 @@ choices through resume/clear/compact, new-startup defaults, inactive compressor
 output, one-shot commands, and statusline visibility. Standalone installation
 also executes the installed tracker to verify its generated runtime dependency.
 
+The off-command regressions failed on commit 0aa7663 before the final parsing
+fix. They cover punctuation on qualified/unqualified slash commands, polite
+and task-scoped natural selectors from both mode states, and preservation of
+state for negations, explanations, and audit/review/help requests. Lifecycle
+checks confirm the reported off requests stop reminders and compression and
+remain off through compaction.
+
 The generator check covers all 13 instruction copies. Its fixture test modifies
 skill sources, confirms check mode detects drift without writing, regenerates,
-and verifies propagation to the runtime text and four Gemini commands.
+and verifies propagation to the runtime text and four Gemini commands. LF/CRLF
+source and checkout round trips produce the same instruction payloads, while
+changes inside serialized JSON/TOML prompts still fail check mode.
 Skill schemas, TOML parsing, syntax, and existing generated artifacts are checked
 separately. These checks do not establish real-host integration or model quality.
 
