@@ -1,5 +1,16 @@
 # H-Mode changelog
 
+## [Unreleased]
+
+- Let explicit activation override an off default.
+- Preserve on/off choices across resume, clear, and compaction; new startup
+  still uses the configured default. Hide both statusline badges while off.
+- Refine all four skills to preserve scope, readability, contracts, and
+  uncertainty; require evidence and impact for audit/review recommendations.
+- Generate 13 instruction copies from the skills, including runtime reminders
+  and complete Gemini command prompts; include runtime JSON in standalone installs.
+- Add activation, statusline, installation, and instruction-propagation regressions.
+
 ## [2.0.0] — 2026-09-10
 
 - Restore the full plugin suite from the documented upstream snapshot.

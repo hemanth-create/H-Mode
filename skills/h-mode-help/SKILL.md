@@ -1,49 +1,52 @@
 ---
 name: h-mode-help
 description: >
-  Quick-reference card for H-Mode commands. One-shot
-  display, not a persistent mode. Use when the user says "h-mode help", "how do I
-  use h-mode", "what h-mode commands", or invokes /h-mode-help.
+  Explain H-Mode commands, activation, and platform differences.
+  Use for /h-mode-help, "h-mode help", "how do I use h-mode", or
+  "what h-mode commands". One-shot help; does not activate persistent mode.
 ---
 
-# H-Mode — quick reference
+# H-Mode Help
 
-**What it is:** maximum-efficiency dev mode. Zero-fluff prose + YAGNI-first code, always on together.
+Explain the commands relevant to the user's host and question. Keep the answer
+concise while including the setup details needed to use them.
 
-## Commands
+| Skill | Purpose |
+|---|---|
+| h-mode | Complete the requested work with concise output and reuse-first code |
+| h-mode-audit [path] | Read-only audit of code and prose in a diff, file, or repo |
+| h-mode-review [path] | Read-only complexity review of a diff or file |
+| h-mode-help | Command, setup, and platform guidance |
 
-| Command | Effect |
-|---------|--------|
-| `/h-mode` | Activate |
-| `/h-mode-audit [path]` | Audit a diff/file/repo for both code bloat AND prose verbosity |
-| `/h-mode-review` | Review the current diff for over-engineering |
-| `/h-mode-help` | Show this reference |
-| `stop h-mode` / `normal mode` | Deactivate |
+Audit includes prose and can cover a whole repository when requested. Review
+focuses on code and defaults to the current diff. Both report evidence, impact,
+confidence, and limitations; neither applies fixes or activates the main mode.
 
-Natural language works: "activate h-mode", "h-mode mode", "h-modify this".
+## Activation
 
-## The code ladder
+Claude standalone skills use /h-mode and /h-mode on to activate, even with
+H_MODE_DEFAULT_MODE=off. /h-mode off, "stop h-mode", or "normal mode" deactivates.
+Resume, clear, and compaction preserve that choice; a new startup uses the
+configured default. The mode flag is shared by sessions in one Claude config
+directory.
 
-YAGNI → reuse → stdlib → native → installed dep → one line → minimum code.
+Natural activation includes "activate h-mode", "h-mode mode", and "h-modify this".
+The configured default controls startup, not whether an explicit command works.
 
-## Statusline
+## Platforms and statusline
 
-`[H-MODE]` — shown while active. Configure via
-`hooks/h-mode-statusline.sh` (or `.ps1` on Windows).
+Claude plugin commands may be qualified: /h-mode:h-mode, /h-mode:h-mode-audit,
+/h-mode:h-mode-review, and /h-mode:h-mode-help. Use the host's command picker.
 
-## Never minimal about
+Codex selects $h-mode, $h-mode-audit, $h-mode-review, or $h-mode-help.
+Gemini supplies the four corresponding slash commands. Editor rules apply
+through their host's instruction mechanism. Those hosts do not use Claude's
+runtime flag.
 
-Input validation, error handling that prevents data loss, security,
-accessibility, anything you explicitly asked for.
+Runtime compression and statuslines are Claude-specific. The Bash statusline
+shows host-provided usage/cost plus approximate savings; PowerShell shows the
+badge and approximate savings. Both hide the badge while off. Compression is
+lossy, and character-based token estimates are not billing evidence.
 
-## Platform differences
-
-Claude plugin commands may appear as `/h-mode:h-mode`, `/h-mode:h-mode-audit`,
-`/h-mode:h-mode-review`, and `/h-mode:h-mode-help`; standalone skills can use
-unqualified names. Codex selects `$h-mode`, `$h-mode-audit`, `$h-mode-review`,
-or `$h-mode-help`. Gemini ships four prompt-based slash commands.
-
-Runtime activation, compression hooks, and statuslines are Claude-specific.
-Audit and review are read-only and must not activate the persistent mode.
-The Bash statusline includes host-provided usage/cost; PowerShell includes the
-badge and approximate savings only. Character-based savings are not billing proof.
+For a manual log preview, the main skill includes an optional helper. Do not
+install, configure, or activate anything just to display this help.

@@ -244,7 +244,7 @@ function installClaudeHooks(ctx) {
   const hooksSrc = path.join(REPO_ROOT, 'hooks');
   const hooksDst = path.join(cfg, 'h-mode-hooks');
   const settingsPath = path.join(cfg, 'settings.json');
-  const HOOK_FILES = ['package.json', 'h-mode-config.js', 'h-mode-activate.js',
+  const HOOK_FILES = ['package.json', 'h-mode-instructions.json', 'h-mode-config.js', 'h-mode-activate.js',
                       'h-mode-mode-tracker.js', 'h-mode-compress-output.js',
                       'h-mode-statusline.sh', 'h-mode-statusline.ps1'];
 

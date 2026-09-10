@@ -13,8 +13,8 @@ const { execFileSync } = require('child_process');
 const TRACKER = path.join(__dirname, '..', 'hooks', 'h-mode-mode-tracker.js');
 
 // Run the tracker with a given prompt against a fresh temp config dir.
-// Returns the flag contents after the run (or null if the flag was removed).
-function runTracker(prompt, { preActive } = {}) {
+// Returns the explicit on/off value, or null if state is uninitialized.
+function runTracker(prompt, { preActive, defaultMode = 'on' } = {}) {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'h-mode-trk-'));
   const flagPath = path.join(dir, '.h-mode-active');
   if (preActive) fs.writeFileSync(flagPath, preActive, { mode: 0o600 });
@@ -22,16 +22,14 @@ function runTracker(prompt, { preActive } = {}) {
   try {
     execFileSync(process.execPath, [TRACKER], {
       input: JSON.stringify({ prompt }),
-      env: { ...process.env, CLAUDE_CONFIG_DIR: dir, H_MODE_DEFAULT_MODE: 'on' },
+      env: { ...process.env, CLAUDE_CONFIG_DIR: dir, H_MODE_DEFAULT_MODE: defaultMode },
       encoding: 'utf8',
       timeout: 5000,
     });
-  } catch (e) { /* tracker silent-fails; we assert on flag state */ }
-
-  let flag = null;
-  try { flag = fs.readFileSync(flagPath, 'utf8').trim(); } catch (e) {}
-  fs.rmSync(dir, { recursive: true, force: true });
-  return flag;
+    return fs.existsSync(flagPath) ? fs.readFileSync(flagPath, 'utf8').trim() : null;
+  } finally {
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
 }
 
 // ── Activation ───────────────────────────────────────────────────────────────
@@ -51,18 +49,24 @@ test('natural language "activate h-mode" activates', () => {
   assert.equal(runTracker('please activate h-mode'), 'on');
 });
 
+test('explicit activation overrides an off default, including qualified and natural commands', () => {
+  for (const prompt of ['/h-mode', '/h-mode on', '/h-mode:h-mode on', 'activate h-mode']) {
+    assert.equal(runTracker(prompt, { defaultMode: 'off', preActive: 'off' }), 'on', prompt);
+  }
+});
+
 // ── Deactivation ─────────────────────────────────────────────────────────────
 
 test('"stop h-mode" deactivates', () => {
-  assert.equal(runTracker('stop h-mode', { preActive: 'on' }), null);
+  assert.equal(runTracker('stop h-mode', { preActive: 'on' }), 'off');
 });
 
 test('"/h-mode off" deactivates', () => {
-  assert.equal(runTracker('/h-mode off', { preActive: 'on' }), null);
+  assert.equal(runTracker('/h-mode off', { preActive: 'on' }), 'off');
 });
 
 test('"normal mode" deactivates', () => {
-  assert.equal(runTracker('normal mode', { preActive: 'on' }), null);
+  assert.equal(runTracker('normal mode', { preActive: 'on' }), 'off');
 });
 
 // ── Regression: must NOT deactivate on unrelated "off"/"stop" ─────────────────

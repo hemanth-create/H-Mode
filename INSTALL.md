@@ -82,6 +82,11 @@ Set H_MODE_DEFAULT_MODE=on or off. Per-user config.json contains
 `{ "defaultMode": "on" }` under XDG_CONFIG_HOME/h-mode or ~/.config/h-mode;
 Windows uses APPDATA/h-mode. CLAUDE_CONFIG_DIR selects the Claude state directory.
 
+The default applies on a new startup. Explicit on/off commands override it for
+the current session; resume, clear, and compaction preserve that choice. The
+state file stores either on or off, and remains shared across sessions using
+the same Claude config directory. Both statuslines suppress the badge when off.
+
 Use H_MODE_UPDATE_CHECK=0 to disable the cached GitHub-release version check.
 Use H_MODE_COMPRESS=0 to disable output rewriting, or H_MODE_COMPRESS_DEDUP=0
 to disable duplicate suppression. Size and head/tail limits remain configurable

@@ -1,5 +1,32 @@
 # Migration validation
 
+## Activation and skill refinements
+
+The follow-up change adds lifecycle, statusline, and instruction-propagation
+regressions. Local Linux/Node 24 validation: 117 tests, 116 passed, 1 skipped
+because PowerShell is unavailable. The PowerShell badge check runs when that
+shell is available, including CI runners that provide it.
+
+The activation regressions were run against the previous behavior and failed
+before the fix. They cover explicit activation with an off default, both state
+choices through resume/clear/compact, new-startup defaults, inactive compressor
+output, one-shot commands, and statusline visibility. Standalone installation
+also executes the installed tracker to verify its generated runtime dependency.
+
+The generator check covers all 13 instruction copies. Its fixture test modifies
+skill sources, confirms check mode detects drift without writing, regenerates,
+and verifies propagation to the runtime text and four Gemini commands.
+Skill schemas, TOML parsing, syntax, and existing generated artifacts are checked
+separately. These checks do not establish real-host integration or model quality.
+
+A separate agent used the revised audit skill on a three-file profile-service
+fixture with no expected findings supplied. It identified private forwarding
+wrappers, preserved the documented cache expiry/invalidation/public boundary,
+and reported its evidence and lack of tests. It made no edits. This is one
+bounded behavioral check, not a broad model evaluation.
+
+## Original migration checks
+
 Validated locally on Linux with Node 24.19.0 and Python 3.12.14.
 Source snapshot and all 197 source-file mappings are recorded in
 [upstream-file-map.json](upstream-file-map.json).

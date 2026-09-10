@@ -7,7 +7,7 @@ Small focused PRs beat big rewrites. H-Mode is a small package — keep it that 
 | File | Purpose |
 |------|---------|
 | `skills/h-mode/SKILL.md` | **Behaviour source.** All rules and examples. The activate hook reads it at runtime. |
-| `scripts/build-rules.js` | Condensed mirror of the skill for the 7 non-Claude agents. **Editing SKILL.md alone does not propagate here** — update the `BODY` too, then regenerate. |
+| `scripts/build-rules.js` | Generates editor rules, AGENTS/GEMINI context, activation rules, runtime instruction JSON, and all four Gemini commands from the skills. |
 | `hooks/h-mode-activate.js` | SessionStart: reads SKILL.md, writes flag, emits rules |
 | `hooks/h-mode-mode-tracker.js` | UserPromptSubmit: `/h-mode` commands, NL detection, per-turn reinforcement |
 | `hooks/h-mode-compress-output.js` | PostToolUse: input-side compression (scrub / elide / dedup tiers, savings ledger) |
@@ -17,7 +17,11 @@ Small focused PRs beat big rewrites. H-Mode is a small package — keep it that 
 
 ## What to edit
 
-**Changing behaviour** → `skills/h-mode/SKILL.md`, **and** the condensed `BODY` in `scripts/build-rules.js`, then `npm run build:rules`. CI checks the copies are in sync with the generator (not with SKILL.md — the mirror is manual, by design).
+**Changing behaviour** → edit the relevant `skills/*/SKILL.md`, then run
+`npm run build:rules`. The marked core/reminder sections in the main skill feed
+shared rules and runtime text. Each Gemini command embeds its corresponding
+skill body. CI checks all 13 generated files against those sources; do not edit
+generated copies directly. Keep the section markers intact.
 
 **Input-side compression** → `hooks/h-mode-compress-output.js`. Correctness invariants that must survive any change: allowlist only (never `Read`/`Edit`), error-line salvage on any elision, dedup only within one session, every tier kill-switchable, hook never throws.
 
@@ -28,10 +32,14 @@ Small focused PRs beat big rewrites. H-Mode is a small package — keep it that 
 ## Tests
 
 ```bash
-npm test        # node --test tests/*.js
+npm test        # node --test tests/*.js tests/*.test.cjs
 ```
 
-Add a test for any hook logic change. Compressor changes go in `tests/test_compress.js`.
+Add focused tests for changed behavior. Activation lifecycle regressions belong
+in `tests/test_activation_lifecycle.js`; command parsing is in
+`tests/test_tracker.js`. Generator tests verify edits propagate without
+enforcing a particular writing style. Compressor tests remain in
+`tests/test_compress.js`.
 
 ## Benchmarks
 
@@ -45,7 +53,7 @@ node benchmarks/replay-compress.js [mode]             # input-axis replay
 
 ## PR checklist
 
-- [ ] SKILL.md and the `build-rules.js` BODY both updated (if behavior changed) + `npm run build:rules`
+- [ ] Relevant SKILL.md updated and `npm run build:rules` run
 - [ ] Hook changes don't break the flag-file security model or the compressor invariants
 - [ ] New measurable behavior gets a benchmark task or replay receipt
 - [ ] `npm test` passes; `npm run check:rules` and `npm run check:chart` clean

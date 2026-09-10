@@ -3,9 +3,9 @@
 // Handles /h-mode commands, natural language activation/deactivation, and
 // per-turn reinforcement.
 
-const fs = require('fs');
 const path = require('path');
-const { getDefaultMode, getClaudeDir, safeWriteFlag, readFlag } = require('./h-mode-config');
+const { getClaudeDir, safeWriteFlag, readFlag } = require('./h-mode-config');
+const { reminder } = require('./h-mode-instructions.json');
 
 const claudeDir = getClaudeDir();
 const flagPath = path.join(claudeDir, '.h-mode-active');
@@ -18,15 +18,15 @@ process.stdin.on('end', () => {
     const prompt = (data.prompt || '').trim();
     const promptLower = prompt.toLowerCase();
     // One-shot audit/review/help commands must not activate the persistent mode.
-    if (/^\/(?:h-mode:)?h-mode-(?:audit|review|help)(?:\s|$)/.test(promptLower)) return;
+    if (/^\/(?:h-mode:)?h-mode-(?:audit|review|help)(?:\s|$)/.test(promptLower) ||
+        /^(?:please\s+)?(?:use\s+)?h-mode[ -](?:audit|review|help)(?:\s|$)/.test(promptLower)) return;
 
     // Natural language activation
     if (/\b(activate|enable|turn on|start|use)\b.*\bh-mode\b/i.test(promptLower) ||
         /\bh-mode\b.*\b(mode|activate|enable|on)\b/i.test(promptLower) ||
         /\bh-modify\b/i.test(promptLower)) {
       if (!/\b(stop|disable|turn off|deactivate|off)\b/i.test(promptLower)) {
-        const mode = getDefaultMode();
-        if (mode !== 'off') safeWriteFlag(flagPath, mode);
+        safeWriteFlag(flagPath, 'on');
       }
     }
 
@@ -36,10 +36,9 @@ process.stdin.on('end', () => {
       const parts = promptLower.split(/\s+/);
       const arg = parts[1] || '';
       if (arg === 'off' || arg === 'stop' || arg === 'disable') {
-        try { fs.unlinkSync(flagPath); } catch (e) {}
+        safeWriteFlag(flagPath, 'off');
       } else {
-        const mode = getDefaultMode();
-        if (mode !== 'off') safeWriteFlag(flagPath, mode);
+        safeWriteFlag(flagPath, 'on');
       }
     }
 
@@ -50,7 +49,7 @@ process.stdin.on('end', () => {
     if (/\b(turn off|disable|deactivate|stop|kill|exit)\s+h-mode\b/i.test(promptLower) ||
         /\bh-mode\s+(mode\s+)?(off|stop|disable|deactivate)\b/i.test(promptLower) ||
         /\bnormal mode\b/i.test(promptLower)) {
-      try { fs.unlinkSync(flagPath); } catch (e) {}
+      safeWriteFlag(flagPath, 'off');
     }
 
     // Per-turn reinforcement
@@ -60,11 +59,7 @@ process.stdin.on('end', () => {
       process.stdout.write(JSON.stringify({
         hookSpecificOutput: {
           hookEventName: 'UserPromptSubmit',
-          additionalContext:
-            'H-MODE ACTIVE. ' +
-            'Prose: drop articles/filler/pleasantries/hedging. Fragments OK. ' +
-            'Code: YAGNI ladder first (reuse → stdlib → native → dep → one line → min code). ' +
-            'Code/commits/security: write normal.'
+          additionalContext: reminder
         }
       }));
     }
